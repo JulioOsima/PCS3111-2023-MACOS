@@ -19,7 +19,6 @@ Sinal* Derivador::processar(Sinal* sinalIN){
     {
         sequenciaOUT[i] = (sequenciaIN[i + 1] - sequenciaIN[i]);
     }
-    
-
+    return sinalOUT;
 }
 

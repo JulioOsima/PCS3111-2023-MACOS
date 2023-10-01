@@ -6,7 +6,11 @@ using namespace std;
 
 Amplificador::Amplificador(double ganho):
 ganho(ganho){
+// ...
+}
 
+Amplificador::~Amplificador(){
+// ...
 }
 
 Sinal* Amplificador::processar(Sinal* sinalIN){

@@ -22,6 +22,7 @@ public:
     double getValor();
     void imprimir();
 };
+#endif
 =======
 #ifndef PEDIDO_H
 #define PEDIDO_H

@@ -4,20 +4,20 @@
 
 using namespace std;
 
-// OBS: Oq usar aqui? posso usar o sistema de herança? Ou tenho que recriar o integrador e 
-
-Piloto::Piloto(double ganho){
-// ...
+Piloto::Piloto(double ganho):
+ganho(ganho){
+    amplificador = new Amplificador(ganho); // DELETADO EM: PILOTO.CPP-L15
+    integrador = new Integrador(); // DELETADO EM: PILOTO.CPP-L16
 }
 
 Piloto::~Piloto(){
-// ...
+    delete amplificador;
+    delete integrador;
 }
 
-
-
 Sinal* Piloto::processar(Sinal* sinalIN){
-    
+    sinalOUT = amplificador->processar(sinalIN);
+    sinalOUT = integrador->processar(sinalOUT);
 
-
+    return sinalOUT;
 }
