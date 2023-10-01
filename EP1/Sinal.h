@@ -15,9 +15,6 @@ private:
     
     string nomeDoSinal;
     
- 
-
-
 public:
     Sinal(double *sequencia, int comprimento);
     virtual ~Sinal();

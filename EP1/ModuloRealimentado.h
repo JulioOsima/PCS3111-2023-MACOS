@@ -10,7 +10,7 @@ private:
     int comprimentoIN;
     double* sequenciaIN = new double[comprimentoIN];
 
-    sinalIN = new Sinal(sequenciaIN, comprimentoIN);
+    Sinal* sinalIN = new Sinal(sequenciaIN, comprimentoIN);
 
 public:
     ModuloRealimentado(double ganho);

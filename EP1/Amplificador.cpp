@@ -15,7 +15,7 @@ Amplificador::~Amplificador(){
 
 Sinal* Amplificador::processar(Sinal* sinalIN){
 
-    Sinal *s1 = new Sinal(sequenciaAmplificada, comprimentoSA);
+    Sinal *s1 = new Sinal(sequenciaAmplificada, comprimentoSA); // DELETADO EM:
     for (int i = 0; i < comprimentoSA; i++)
     {
         sequenciaAmplificada[i] = ((ganho * (sinalIN->getSequencia())[i])); // N tenho certeza se funciona, "sinalIN->getSequencia" deve retornar um vetor de double, entao so coloquei o indice do lado

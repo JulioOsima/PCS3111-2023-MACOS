@@ -23,7 +23,7 @@ Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
         comprimentoSoma = comprimentoIN1;
     }
     
-    double* sequenciaSomada = new double[comprimentoSoma]; // Verificar se a relação comprimento e posição do vetor
+    double* sequenciaSomada = new double[comprimentoSoma]; // Verificar se a relação comprimento e posição do vetor DELETADO EM:
 
     for (int i = 0; i < comprimentoSoma; i++)
     {

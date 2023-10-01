@@ -12,7 +12,6 @@ private:
     Sinal* sinalIN = new Sinal(sequenciaAmplificada, comprimentoSA); // DELETADO EM:
 
 public:
-    
     Amplificador(double ganho);
     virtual ~Amplificador();
     Sinal* processar(Sinal* sinalIN);

@@ -4,4 +4,15 @@
 
 using namespace std;
 
+ModuloRealimentado::ModuloRealimentado(double ganho) : 
+ganho(ganho){
+// ... 
+}
 
+ModuloRealimentado::~ModuloRealimentado(){
+// ...
+}
+
+Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
+// ... adicionar o resto do metodo
+}
