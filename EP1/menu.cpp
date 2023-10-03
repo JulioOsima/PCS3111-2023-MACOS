@@ -33,6 +33,7 @@ void aquisicao(){
         cout << "Qual o valor dessa constante?" << endl;
         cin >> respostaAquisicao;
         cout << "C = " << respostaAquisicao << endl;
+        //Sinal *sinalConstante = new Sinal( ,60);  Criar uma nova sequencia? E depois criar um for para que todas as casas do vetor tenham o msm numero?
 
         // Criar o sinal com o valor constante. O comprimento ssempre tem tamanho igual a 60
 
