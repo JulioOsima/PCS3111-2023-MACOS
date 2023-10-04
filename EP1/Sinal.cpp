@@ -29,7 +29,7 @@ int Sinal::getComprimento(){
 }
 
 void Sinal::imprimir(string nomeDoSinal){
-    Grafico *graficoSinal = new Grafico(nomeDoSinal, sequenciaCopia, comprimento); //
+    Grafico *graficoSinal = new Grafico(nomeDoSinal, sequenciaCopia, comprimento); // É a última coisa a ser feita, preciso deletar?
     graficoSinal->plot();
     
 }
