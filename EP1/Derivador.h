@@ -7,12 +7,13 @@ using namespace std;
 
 class Derivador{
 private:
-    int comprimentoIN;
-    double* sequenciaIN = new double[comprimentoIN]; // DELETADO EM:
-    Sinal* sinalIN = new Sinal(sequenciaIN, comprimentoIN); // DELETADO EM:
 
-    double* sequenciaOUT = new double[comprimentoIN]; // DELETADO EM:
-    Sinal* sinalOUT = new Sinal(sequenciaOUT, comprimentoIN); // DELETADO EM:
+    // Declarar como variaveis locais:
+    int comprimentoIN;
+    double* sequenciaIN;
+    Sinal* sinalIN; 
+
+    double* sequenciaOUT;
 
 public:
     Derivador();

@@ -6,11 +6,8 @@ using namespace std;
 
 class ModuloRealimentado{
 private:
+    // Definir como variaveis locais:
     double ganho;
-    int comprimentoIN;
-    double* sequenciaIN = new double[comprimentoIN];
-
-    Sinal* sinalIN = new Sinal(sequenciaIN, comprimentoIN);
 
 public:
     ModuloRealimentado(double ganho);

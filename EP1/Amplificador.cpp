@@ -4,8 +4,7 @@
 
 using namespace std;
 
-Amplificador::Amplificador(double ganho):
-ganho(ganho){
+Amplificador::Amplificador(double ganho):ganho(ganho){
 // ...
 }
 
@@ -14,15 +13,14 @@ Amplificador::~Amplificador(){
 }
 
 Sinal* Amplificador::processar(Sinal* sinalIN){
+    
+    double* sequenciaAmplificada = new double[sinalIN->getComprimento()]; //DELETADO EM:
 
-    // o vetor sequenciaAmplificada deve ser criado aqui no metodo ou no definicao da classe? Tem diferença?
-
-    Sinal *s1 = new Sinal(sequenciaAmplificada, comprimentoSA); // DELETADO EM:
-    for (int i = 0; i < comprimentoSA; i++)
+    for (int i = 0; i < sinalIN->getComprimento(); i++)
     {
-        sequenciaAmplificada[i] = ((ganho * (sinalIN->getSequencia())[i])); // N tenho certeza se funciona, "sinalIN->getSequencia" deve retornar um vetor de double, entao so coloquei o indice do lado
+        sequenciaAmplificada[i] = ((ganho * (sinalIN->getSequencia())[i])); 
     } 
-    // Preciso dar algum return aqui?  
+    return new Sinal(sequenciaAmplificada, sinalIN->getComprimento()); // DELETADO EM:
 }
 
 void Amplificador::setGanho(double ganho){

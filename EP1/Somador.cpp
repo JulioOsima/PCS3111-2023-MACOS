@@ -14,25 +14,30 @@ Somador::~Somador(){
 
 Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
     int comprimentoSoma;
-    if (comprimentoIN1 > comprimentoIN2 || comprimentoIN1 == comprimentoIN2)
+
+    sequenciaIN1 = new double[sinalIN1->getComprimento()]; // DELETADO EM:
+    sequenciaIN2 = new double[sinalIN2->getComprimento()]; // DELETADO EM:
+
+
+    if ((sinalIN1->getComprimento()) > (sinalIN2->getComprimento()) || (sinalIN1->getComprimento()) == (sinalIN2->getComprimento()))
     {
-        comprimentoSoma = comprimentoIN2;
+        comprimentoSoma = (sinalIN2->getComprimento()); // comprimentoSoma = comprimento do sinal sinalIN1
     }
-    if (comprimentoIN2 > comprimentoIN1)
+    if ((sinalIN2->getComprimento()) > (sinalIN1->getComprimento()))
     {
-        comprimentoSoma = comprimentoIN1;
+        comprimentoSoma = (sinalIN1->getComprimento());
     }
     
-    double* sequenciaSomada = new double[comprimentoSoma]; // Verificar se a relação comprimento e posição do vetor -> sequenciaSomada tem "comprimentoSoma" casas e vai de 0 à "comprimentoSoma" - 1 DELETADO EM:
+    double* sequenciaSomada = new double[comprimentoSoma]; // DELETADO EM:
 
     for (int i = 0; i < comprimentoSoma; i++)
     {
         sequenciaSomada[i] = sequenciaIN1[i] + sequenciaIN2[i];
     }
     
-    Sinal* soma = new Sinal(sequenciaSomada, comprimentoSoma); // DELETADO EM:
+    return new Sinal(sequenciaSomada, comprimentoSoma); // DELETADO EM:
 
-    return soma;
+    
 } 
 
 
