@@ -10,7 +10,6 @@ class Sinal{
 private:
     int comprimento;
     double *sequencia; // Dessa forma o vetor tem "Comprimento" casas e vai de 0 à comprimento - 1 // DELETADO EM:
-     // DELETADO EM:
     
     string nomeDoSinal;
     

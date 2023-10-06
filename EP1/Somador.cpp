@@ -15,8 +15,8 @@ Somador::~Somador(){
 Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
     int comprimentoSoma;
 
-    sequenciaIN1 = new double[sinalIN1->getComprimento()]; // DELETADO EM:
-    sequenciaIN2 = new double[sinalIN2->getComprimento()]; // DELETADO EM:
+    sequenciaIN1 = new double[sinalIN1->getComprimento()]; // DELETADO EM: Somador.cpp-L38
+    sequenciaIN2 = new double[sinalIN2->getComprimento()]; // DELETADO EM: Somador.cpp-L39
 
 
     if ((sinalIN1->getComprimento()) > (sinalIN2->getComprimento()) || (sinalIN1->getComprimento()) == (sinalIN2->getComprimento()))
@@ -35,9 +35,10 @@ Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
         sequenciaSomada[i] = sequenciaIN1[i] + sequenciaIN2[i];
     }
     
-    return new Sinal(sequenciaSomada, comprimentoSoma); // DELETADO EM:
+    delete[] sequenciaIN1;
+    delete[] sequenciaIN2;
 
-    
+    return new Sinal(sequenciaSomada, comprimentoSoma); // DELETADO EM:
 } 
 
 

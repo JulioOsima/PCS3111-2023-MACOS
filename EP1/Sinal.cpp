@@ -5,8 +5,6 @@
 
 using namespace std;
 
-// OBS:  
-
 Sinal::Sinal(double *sequencia, int comprimento) :comprimento(comprimento){
     this->sequencia = new double[comprimento]; // DELETADO EM: Sinal.cpp-L19
     for (int i = 0; i < comprimento; i++)

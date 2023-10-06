@@ -16,7 +16,7 @@ ModuloRealimentado::~ModuloRealimentado(){
 Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
 // ... adicionar o resto do metodo
     // Criar um vetor 
-    sequencia = new double[(sinalIN->getComprimento())];
+    sequencia = new double[(sinalIN->getComprimento())]; // DELETADO EM: 
     saidaInvertida[0] = 0;
 
     for (int i = 1; i < (sinalIN->getComprimento()); i++)

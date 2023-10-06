@@ -9,8 +9,13 @@
 
 using namespace std;
 
-// OBS: 
-// Onde entra o ModuloRealimentado?
+// Perguntas:
+// 1) Onde entra o ModuloRealimentado?
+// 2) Preciso declarar as funções daqui no arquivo main.cpp?
+// 3) Preciso usar o ifndef em todos os aqruivos?
+// 4) Da onde vem o erro de compilação do judge
+// 5) Como deleto manualmente os itens criados nos outros aqruivos?
+// 6) De onde vem os erros em relação ao grafico.h/grafico.cpp que aparecem quando compilo
 
 
 Sinal* criarSinal(int tipo){
