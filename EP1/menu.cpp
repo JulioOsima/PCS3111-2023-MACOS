@@ -9,7 +9,8 @@
 
 using namespace std;
 
-// OBS: Criar uma funçao criaPlotaGrafico()
+// OBS: 
+// Onde entra o ModuloRealimentado?
 
 
 Sinal* criarSinal(int tipo){
