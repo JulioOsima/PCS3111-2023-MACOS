@@ -1,3 +1,5 @@
+#ifndef SOMADOR_H
+#define SOMADOR_H
 #include "Sinal.h"
 #include <iostream>
 #include <string>
@@ -18,6 +20,6 @@ public:
     Sinal* processar(Sinal* sinalIN1, Sinal* sinalIN2);
 };
 
-
+#endif
 
 

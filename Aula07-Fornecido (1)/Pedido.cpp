@@ -59,34 +59,25 @@ void Pedido::imprimir(){
 }
 
 ProdutoComDesconto** Pedido::getProdutosComDesconto(int& quantidade){
-    int aux;
+    int aux = 0;
     
     produtosComDesconto = new ProdutoComDesconto*[quantidadeMaxima];
     for (int i = 0; i < quantidade; i++)
     {
         if (dynamic_cast<ProdutoComDesconto*>((itens[i])->getProduto()) != NULL)
         {
-           produtosComDesconto[i] = dynamic_cast<ProdutoComDesconto*>((itens[i])->getProduto());
-           aux = i;
+           produtosComDesconto[aux] = dynamic_cast<ProdutoComDesconto*>((itens[i])->getProduto());
+           aux++;
         }
         produtosComDesconto[i] = NULL;
     }
-    int aux2 = 0;
-    
-    for (int j = 0; j < aux; j++)
-    {
-        if (produtosComDesconto[j] != NULL)
-        {
-            produtosComDesconto[aux2] = produtosComDesconto[j];
-            aux2++;
-        }
-    }
-    if (aux2 < 1)
+
+    if (aux < 1)
     {
         return NULL;
     }
     
-    return produtosComDesconto;
+    return produtosComDesconto; // Como retornar a quantidade junto?
 
 
 

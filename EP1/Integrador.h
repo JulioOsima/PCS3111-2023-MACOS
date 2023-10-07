@@ -1,3 +1,6 @@
+#ifndef INTEGRADOR_H
+#define INTEGRADOR_H
+
 #include "Sinal.h"
 #include <iostream>
 #include <string>
@@ -13,3 +16,5 @@ public:
     virtual ~Integrador();
     Sinal* processar(Sinal* sinalIN);
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef PILOTO_H
+#define PILOTO_H
+
 #include "Integrador.h"
 #include "Amplificador.h"
 #include <iostream>
@@ -21,3 +24,5 @@ public:
     Sinal* processar(Sinal* sinalIN);
 
 };
+
+#endif

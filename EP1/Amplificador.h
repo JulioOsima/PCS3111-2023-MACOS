@@ -1,3 +1,6 @@
+#ifndef AMPLIFICADOR_H
+#define AMPLIFICADOR_H
+
 #include "Sinal.h"
 #include <iostream>
 #include <string>
@@ -17,3 +20,5 @@ public:
 
 
 };
+
+#endif

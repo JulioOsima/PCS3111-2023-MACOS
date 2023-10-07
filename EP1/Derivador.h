@@ -1,3 +1,5 @@
+#ifndef DERIVADOR_H
+#define DERIVADOR_H
 #include "Sinal.h"
 #include <iostream>
 #include <string>
@@ -18,3 +20,5 @@ public:
     virtual ~Derivador();
     Sinal* processar(Sinal* sinalIN);
 };
+
+#endif
