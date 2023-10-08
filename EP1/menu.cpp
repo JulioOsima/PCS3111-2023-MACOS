@@ -16,6 +16,7 @@ using namespace std;
 
 // Coisas para mudar:
 // Deletar os itens do heap
+// Adicionar a classe piloto no Modulo Realimentado
 
 
 Sinal* criarSinal(int tipo){
@@ -31,7 +32,7 @@ Sinal* criarSinal(int tipo){
     switch (tipo){
     case 1:
         for (int i = 0; i < 60; i++){
-            sequencia1[i] = (5 + 3 * cos((i * M_PI)) / 8);
+            sequencia1[i] = (5 + 3 * cos(i * M_PI / 8));
         }
         return new Sinal(sequencia1, 60);
     case 2:
