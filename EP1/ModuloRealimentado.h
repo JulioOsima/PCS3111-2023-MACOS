@@ -11,9 +11,8 @@ class ModuloRealimentado{
 private:
     // Definir como variaveis locais:
     double ganho;
-    double *sequencia;
-    double *saidaInvertida;
-    Sinal* saidainvertidaS;
+    double *vetorSaida;
+    Sinal* saida;
 
 public:
     ModuloRealimentado(double ganho);

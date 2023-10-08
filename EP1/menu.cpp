@@ -49,18 +49,20 @@ Sinal* criarSinal(int tipo){
         return new Sinal(sequencia1, 60);
     case 2:
         cout << "Qual o valor dessa constante?" << endl << 
-                "C = " << endl;
+                "C = ";
         cin >> constante;
-        for (int i = 0; i < 59; i++) // Alterei para 59
+        cout << "" << endl;
+        for (int i = 0; i < 60; i++) // Alterei para 59
         {
             sequencia2[i] = constante;
         }
         return new Sinal(sequencia2, 60);
     
     case 3:
-        cout << "Qual a inclinacao dessa rampa?" << endl;
+        cout << "Qual a inclinacao dessa rampa?" << endl << 
+                "a = ";
         cin >> inclinacao;
-        cout << "a = " << inclinacao << endl;
+        cout << "" << endl;
         for (int i = 0; i < 60; i++)
         {
             sequencia3[i] = i * inclinacao;
@@ -79,15 +81,21 @@ Sinal* aquisicao(){
             "1) 5+3*cos(n*pi/8)" << endl <<
             "2) constante" << endl << 
             "3) rampa" << endl << 
-            "Escolha: " << endl;
+            "Escolha: ";
     cin >> respostaAquisicao;
+    cout << "" << endl;
+
+
+    Sinal* sinalAdquirido;
     
     switch (respostaAquisicao)
     {
     case 1:
-        return criarSinal(respostaAquisicao);
+        sinalAdquirido = criarSinal(respostaAquisicao);
+        return sinalAdquirido;
     case 2:
-        return criarSinal(respostaAquisicao);
+        sinalAdquirido = criarSinal(respostaAquisicao);
+        return sinalAdquirido;
     case 3:
         return criarSinal(respostaAquisicao);
     default:
@@ -119,8 +127,9 @@ void menu(){
     cout << "Qual simulacao voce gostaria de fazer?"<< endl << 
             "1) Piloto Automatico" << endl << 
             "2)Sua propria sequencia de operacoes"<< endl <<
-            "Escolha: " << endl;
+            "Escolha: ";
     cin >> resposta;
+    cout << "" << endl;
 
 
 /********************************************************************************************/
@@ -128,6 +137,7 @@ void menu(){
     double g1 = 0;
     Sinal* s1;
     Sinal* saida1;
+    ModuloRealimentado* PA;
     // switch(resposta) caso 1
 
     // switch(resposta) caso 2
@@ -159,14 +169,16 @@ void menu(){
     switch (resposta)
     {
     case 1:
-        s1 = aquisicao(); // Preciso criar uma variavel do tipo sinal aqui?
-        cout << "Qual o ganho do acelerador?" << endl;
+        s1 = aquisicao(); // s1 = valor de referencia
+        cout << "Qual o ganho do acelerador?" << endl <<
+                "g = ";
         cin >> g1;
-        cout << "g = " << g1 << endl;
+        cout << "" << endl;
 
-        
-        saida1 = (pilotoAutomatico(g1)->processar(s1)); //
+        PA = pilotoAutomatico(g1);
 
+        saida1 = (PA->processar(s1)); 
+    
         criaPlotaGrafico("Velocidade do carro",(saida1->getSequencia()), (saida1->getComprimento()));
 
         delete s1;
@@ -175,8 +187,6 @@ void menu(){
         break;
     
     case 2:
-        
-        cout << "Escolha: 2" << endl;
         s2 = aquisicao();
         while (continuar == 1)      
         {
@@ -184,35 +194,36 @@ void menu(){
                     "1) Amplificar" << endl << 
                     "2) Somar" << endl << 
                     "3) Derivar" << endl <<
-                    "4) Integrar" << endl;
-            
+                    "4) Integrar" << endl <<
+                    "Escolha: ";
             cin >> operacao;
-            cout << "Escolha: " << operacao << endl;    
+            cout << "" << endl;  
+
             switch (operacao)
             {
-            case 1:
+            case 1: // Amplificar
                 cout << "Qual o ganho dessa amplificacao?" << endl;
                 cin >> g2;
                 cout << "g = " << g2 << endl;
                 amplificador->setGanho(g2);
-                amplificador->processar(s2);
+                s2 = amplificador->processar(s2);
 
                 delete amplificador;
                 break;
-            case 2:
+            case 2: // Somar
                 cout << "Informe mais um sinal para ser somado." << endl;
                 s3 = aquisicao();
-                somador->processar(s2, s3);
+                s2 = somador->processar(s2, s3);
 
                 delete somador;
                 break;
-            case 3:
-                derivador->processar(s2);
+            case 3: // Derivar
+                s2 = derivador->processar(s2);
                 
                 delete derivador;
                 break;
-            case 4:
-                integrador->processar(s2);
+            case 4: // Integrar
+                s2 = integrador->processar(s2);
                 
                 delete integrador;
                 break;
@@ -222,14 +233,14 @@ void menu(){
             }
             cout << "O que voce quer fazer agora?" << endl <<
                     "1) Realizar mais uma operacao no resultado" << endl << 
-                    "2) Imprimir o resultado para terminar" << endl;
+                    "2) Imprimir o resultado para terminar" << endl <<
+                    "Escolha: ";
             cin >> continuar;
-            cout << "Escolha: " << continuar << endl;
+            cout << "" << endl;
             if (continuar != 1 && continuar != 2)
             {
                 cout << "Valor inválido" << endl;
             }
-        
         }
 
         criaPlotaGrafico("Resultado Final", (s2->getSequencia()), (s2->getComprimento()));
