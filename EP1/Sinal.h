@@ -10,9 +10,7 @@ class Sinal{
 private:
     int comprimento;
     double *sequencia;
-    
     string nomeDoSinal;
-    
 public:
     Sinal(double *sequencia, int comprimento);
     virtual ~Sinal();

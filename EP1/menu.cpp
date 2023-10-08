@@ -19,23 +19,23 @@ using namespace std;
 // Adicionar a classe piloto no Modulo Realimentado
 
 
-Sinal* criarSinal(int tipo){
+Sinal* criarSinal(int tipo){ // Cria o sinal selecionado na função "aquisicao"
     int valor;
-    double *sequencia1 = new double[60];
+    double *sequencia1 = new double[60]; // DELETADO EM:
 
     int constante;
-    double *sequencia2 = new double[60];
+    double *sequencia2 = new double[60]; // DELETADO EM:
 
     double inclinacao;
-    double *sequencia3 = new double[60];
+    double *sequencia3 = new double[60]; // DELETADO EM:
 
-    switch (tipo){
-    case 1:
+    switch (tipo){ // Tipo do sinal 
+    case 1: // Sinal senoidal
         for (int i = 0; i < 60; i++){
             sequencia1[i] = (5 + 3 * cos(i * M_PI / 8));
         }
-        return new Sinal(sequencia1, 60);
-    case 2:
+        return new Sinal(sequencia1, 60); // DELETADO EM: menu.cpp-(L169/L230/L231)
+    case 2: // Sinal constante
         cout << "Qual o valor dessa constante?" << endl << 
                 "C = ";
         cin >> constante;
@@ -43,8 +43,8 @@ Sinal* criarSinal(int tipo){
         for (int i = 0; i < 60; i++){
             sequencia2[i] = constante;
         }
-        return new Sinal(sequencia2, 60);
-    case 3:
+        return new Sinal(sequencia2, 60); // DELETADO EM: menu.cpp-(L169/L230/L231)
+    case 3: // Sinal de função afim
         cout << "Qual a inclinacao dessa rampa?" << endl << 
                 "a = ";
         cin >> inclinacao;
@@ -52,7 +52,7 @@ Sinal* criarSinal(int tipo){
         for (int i = 0; i < 60; i++){
             sequencia3[i] = i * inclinacao;
         }
-        return new Sinal(sequencia3, 60); 
+        return new Sinal(sequencia3, 60); // DELETADO EM: menu.cpp-(L169/L230/L231)
     default:
         cout << "Erro" << endl;
         return 0;
@@ -63,16 +63,16 @@ Sinal* criarSinal(int tipo){
 Sinal* aquisicao(){
     int respostaAquisicao;
     cout << "Qual sinal voce gostaria de utilizar como entrada da sua simulacao? " << endl <<
-            "1) 5+3*cos(n*pi/8)" << endl <<
-            "2) constante" << endl << 
-            "3) rampa" << endl << 
+            "1) 5+3*cos(n*pi/8)"                                                   << endl <<
+            "2) constante"                                                         << endl << 
+            "3) rampa"                                                             << endl << 
             "Escolha: ";
     cin >> respostaAquisicao;
     cout << "" << endl;
 
     Sinal* sinalAdquirido;
     
-    switch (respostaAquisicao)
+    switch (respostaAquisicao) 
     {
     case 1:
         sinalAdquirido = criarSinal(respostaAquisicao);
@@ -107,21 +107,21 @@ ModuloRealimentado* pilotoAutomatico(double ganho){
 
 void menu(){
     int resposta;
-    cout << "    Simulink em C++" << endl;
+    cout << "    Simulink em C++"                   << endl;
     cout << "Qual simulacao voce gostaria de fazer?"<< endl << 
-            "1) Piloto Automatico" << endl << 
-            "2)Sua propria sequencia de operacoes"<< endl <<
+            "1) Piloto Automatico"                  << endl << 
+            "2)Sua propria sequencia de operacoes"  << endl <<
             "Escolha: ";
     cin >> resposta;
     cout << "" << endl;
 
 
-/********************************************************************************************/
+/************** DECLARAÇÃO DE VARIÁVEIS ******************************************************************************/
     // switch(resposta) caso 1
     double g1 = 0;
-    Sinal* s1;
-    Sinal* saida1;
-    ModuloRealimentado* PA;
+    Sinal* s1; // DELETADO EM: menu.cpp-L169
+    Sinal* saida1; // DELETADO EM: menu.cpp-L170
+    ModuloRealimentado* PA; // DELETADO EM: menu.cpp-L168
     // switch(resposta) caso 1
 
     // switch(resposta) caso 2
@@ -131,21 +131,21 @@ void menu(){
 
     // switch(resposta) caso2 / switch(opercao) caso 1
     double g2 = 0;
-    Sinal* s2;
-    Amplificador *amplificador = new Amplificador(g2); // DELETADO EM: menu.cpp-L137
+    Sinal* s2; // DELETADO EM: menu.cpp-L230
+    Amplificador *amplificador = new Amplificador(g2); // DELETADO EM: menu.cpp-194
     // switch(resposta) caso2 / switch(opercao) caso 1
 
     // switch(resposta) caso2 / switch(opercao) caso 2
-    Sinal *s3;
-    Somador *somador = new Somador(); // DELETADO EM: menu.cpp-L146
+    Sinal *s3; // DELETADO EM: menu.cpp-L231
+    Somador *somador = new Somador(); // DELETADO EM: menu.cpp-L201
     // switch(resposta) caso2 / switch(opercao) caso 2
 
     // switch(resposta) caso2 / switch(opercao) caso 3
-    Derivador *derivador = new Derivador(); // DELETADO EM: menu.cpp-L152
+    Derivador *derivador = new Derivador(); // DELETADO EM: menu.cpp-L206
     // switch(resposta) caso2 / switch(opercao) caso 3
 
     // switch(resposta) caso2 / switch(opercao) caso 4
-    Integrador *integrador = new Integrador(); // DELETADO EM: menu.cpp-L158
+    Integrador *integrador = new Integrador(); // DELETADO EM: menu.cpp-L211
     // switch(resposta) caso2 / switch(opercao) caso 4  
 
 /********************************************************************************************/
@@ -165,6 +165,7 @@ void menu(){
     
         criaPlotaGrafico("Velocidade do carro",(saida1->getSequencia()), (saida1->getComprimento()));
 
+        delete PA;
         delete s1;
         delete saida1;
         break;
@@ -173,10 +174,10 @@ void menu(){
         s2 = aquisicao();
         while (continuar == 1){
             cout << "Qual operacao voce gostaria de fazer?" << endl << 
-                    "1) Amplificar" << endl << 
-                    "2) Somar" << endl << 
-                    "3) Derivar" << endl <<
-                    "4) Integrar" << endl <<
+                    "1) Amplificar"                         << endl << 
+                    "2) Somar"                              << endl << 
+                    "3) Derivar"                            << endl <<
+                    "4) Integrar"                           << endl <<
                     "Escolha: ";
             cin >> operacao;
             cout << "" << endl;  
@@ -213,9 +214,9 @@ void menu(){
                 cout << "Erro" << endl;
                 break;
             }
-            cout << "O que voce quer fazer agora?" << endl <<
-                    "1) Realizar mais uma operacao no resultado" << endl << 
-                    "2) Imprimir o resultado para terminar" << endl <<
+            cout << "O que voce quer fazer agora?"                  << endl <<
+                    "1) Realizar mais uma operacao no resultado"    << endl << 
+                    "2) Imprimir o resultado para terminar"         << endl <<
                     "Escolha: ";
             cin >> continuar;
             cout << "" << endl;
@@ -225,6 +226,9 @@ void menu(){
         }
 
         criaPlotaGrafico("Resultado Final", (s2->getSequencia()), (s2->getComprimento()));
+
+        delete s2;
+        delete s3;
         break;
 
     default:

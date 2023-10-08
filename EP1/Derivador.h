@@ -13,7 +13,6 @@ private:
     double* sequenciaIN;
     Sinal* sinalIN; 
     double* sequenciaOUT;
-
 public:
     Derivador();
     virtual ~Derivador();

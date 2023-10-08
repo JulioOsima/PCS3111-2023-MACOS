@@ -2,9 +2,7 @@
 #include <iostream>
 #include <string>
 
-
 using namespace std;
-
 
 Integrador::Integrador(){
 // ...
@@ -15,7 +13,6 @@ Integrador::~Integrador(){
 }
 
 Sinal* Integrador::processar(Sinal* sinalIN){
-
     sequenciaOUT = new double[sinalIN->getComprimento()]; // DELETADO EM:
     sequenciaOUT[0] = (sinalIN->getSequencia()[0]);
 

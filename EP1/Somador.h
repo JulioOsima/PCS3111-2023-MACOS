@@ -11,7 +11,6 @@ class Somador{
 private:
     double* sequenciaIN1;
     double* sequenciaIN2;
-
 public:
     Somador();
     virtual ~Somador();
