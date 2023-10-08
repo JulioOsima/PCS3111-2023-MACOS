@@ -12,7 +12,6 @@ private:
     int comprimentoIN;
     double* sequenciaIN;
     Sinal* sinalIN; 
-
     double* sequenciaOUT;
 
 public:

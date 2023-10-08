@@ -11,18 +11,14 @@ using namespace std;
 class Piloto{  
 private:
     double ganho;
-
     Integrador *integrador;
-    Amplificador *amplificador;
-    
+    Amplificador *amplificador;    
     double* sequenciaOUT;
     Sinal* sinalOUT;
-
 public:
     Piloto(double ganho);
     virtual ~Piloto();
     Sinal* processar(Sinal* sinalIN);
-
 };
 
 #endif

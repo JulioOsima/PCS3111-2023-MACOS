@@ -17,13 +17,10 @@ ModuloRealimentado::~ModuloRealimentado(){
 }
 
 Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
-// ... adicionar o resto do metodo
-    // Criar um vetor 
     vetorSaida = new double[(sinalIN->getComprimento())];
     vetorSaida[0] = ganho * sinalIN->getSequencia()[0];
     
-    for (int i = 1; i < (sinalIN->getComprimento()); i++)
-    {
+    for (int i = 1; i < (sinalIN->getComprimento()); i++){
         vetorSaida[i] = vetorSaida[i - 1] + (ganho * (sinalIN->getSequencia()[i] - vetorSaida[i - 1]));
     }
 

@@ -18,7 +18,7 @@ void criaPlotaGrafico(string nome, double *sequencia, int comprimento);
 
 Piloto* piloto(double ganhop);
 
-void menu(); // Preciso declarar as outras funções aqui???
+void menu(); 
 
 int main() {
     menu();

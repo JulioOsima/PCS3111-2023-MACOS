@@ -18,8 +18,7 @@ Sinal* Derivador::processar(Sinal* sinalIN){
     
     sequenciaOUT[0] = sequenciaIN[0];
 
-    for (int i = 1; i < sinalIN->getComprimento(); i++)
-    {
+    for (int i = 1; i < sinalIN->getComprimento(); i++){
         sequenciaOUT[i] = (sequenciaIN[i] - sequenciaIN[i - 1]);
     }
 

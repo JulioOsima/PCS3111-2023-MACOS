@@ -11,22 +11,11 @@ using namespace std;
 
 // Perguntas:
 // 1) Onde entra o ModuloRealimentado? R: Entra no Piloto Automatico
-// 2) Preciso declarar as funções daqui no arquivo main.cpp? R: Sim
-// 3) Preciso usar o ifndef em todos os aqruivos? R: Sim 
-// 4) Da onde vem o erro de compilação do judge R: Provavelmente pela falta de ifndef
-// 5) Como deleto manualmente os itens criados nos outros aqruivos? 
-// 6) De onde vem os erros em relação ao grafico.h/grafico.cpp que aparecem quando compilo  
 
 // ao compilar utilizar um identificador de compilacao = g++ -std=c++11 *.cpp -o ep1
 
-
 // Coisas para mudar:
 // Deletar os itens do heap
-// Adicionar o modulo realimentado
-
-
-//EXEPLO 1:
-// 1 - 2 - 5 - 0.2 -> resposta (quase um log)
 
 
 Sinal* criarSinal(int tipo){
@@ -39,11 +28,9 @@ Sinal* criarSinal(int tipo){
     double inclinacao;
     double *sequencia3 = new double[60];
 
-    switch (tipo)
-    {
+    switch (tipo){
     case 1:
-        for (int i = 0; i < 60; i++)
-        {
+        for (int i = 0; i < 60; i++){
             sequencia1[i] = (5 + 3 * cos((i * M_PI)) / 8);
         }
         return new Sinal(sequencia1, 60);
@@ -52,22 +39,19 @@ Sinal* criarSinal(int tipo){
                 "C = ";
         cin >> constante;
         cout << "" << endl;
-        for (int i = 0; i < 60; i++) // Alterei para 59
-        {
+        for (int i = 0; i < 60; i++){
             sequencia2[i] = constante;
         }
         return new Sinal(sequencia2, 60);
-    
     case 3:
         cout << "Qual a inclinacao dessa rampa?" << endl << 
                 "a = ";
         cin >> inclinacao;
         cout << "" << endl;
-        for (int i = 0; i < 60; i++)
-        {
+        for (int i = 0; i < 60; i++){
             sequencia3[i] = i * inclinacao;
         }
-        return new Sinal(sequencia3, 60); // aqui comeca o loop infinito 
+        return new Sinal(sequencia3, 60); 
     default:
         cout << "Erro" << endl;
         return 0;
@@ -84,7 +68,6 @@ Sinal* aquisicao(){
             "Escolha: ";
     cin >> respostaAquisicao;
     cout << "" << endl;
-
 
     Sinal* sinalAdquirido;
     
@@ -169,7 +152,7 @@ void menu(){
     switch (resposta)
     {
     case 1:
-        s1 = aquisicao(); // s1 = valor de referencia
+        s1 = aquisicao(); 
         cout << "Qual o ganho do acelerador?" << endl <<
                 "g = ";
         cin >> g1;
@@ -183,13 +166,11 @@ void menu(){
 
         delete s1;
         delete saida1;
-
         break;
     
     case 2:
         s2 = aquisicao();
-        while (continuar == 1)      
-        {
+        while (continuar == 1){
             cout << "Qual operacao voce gostaria de fazer?" << endl << 
                     "1) Amplificar" << endl << 
                     "2) Somar" << endl << 
@@ -199,12 +180,12 @@ void menu(){
             cin >> operacao;
             cout << "" << endl;  
 
-            switch (operacao)
-            {
+            switch (operacao){
             case 1: // Amplificar
-                cout << "Qual o ganho dessa amplificacao?" << endl;
+                cout << "Qual o ganho dessa amplificacao?"<< endl <<
+                        "g = ";
                 cin >> g2;
-                cout << "g = " << g2 << endl;
+                cout << "" << endl;
                 amplificador->setGanho(g2);
                 s2 = amplificador->processar(s2);
 
@@ -237,19 +218,16 @@ void menu(){
                     "Escolha: ";
             cin >> continuar;
             cout << "" << endl;
-            if (continuar != 1 && continuar != 2)
-            {
+            if (continuar != 1 && continuar != 2){
                 cout << "Valor inválido" << endl;
             }
         }
 
         criaPlotaGrafico("Resultado Final", (s2->getSequencia()), (s2->getComprimento()));
-
         break;
 
     default:
         cout << "Erro!" << endl;
         break;
-    }
-    
+    } 
 }

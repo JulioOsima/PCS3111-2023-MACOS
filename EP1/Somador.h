@@ -9,8 +9,6 @@ using namespace std;
 
 class Somador{
 private:
-
-    // Definir essas variaveis como variaveis locais:
     double* sequenciaIN1;
     double* sequenciaIN2;
 
