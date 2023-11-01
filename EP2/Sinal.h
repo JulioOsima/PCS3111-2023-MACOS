@@ -8,7 +8,6 @@ using namespace std;
 
 class Sinal{
 private:
-    string nomeDoSinal;
     int comprimento;
     double* sequencia;
     

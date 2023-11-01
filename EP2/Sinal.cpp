@@ -71,10 +71,12 @@ void Sinal::imprimir(int tamanho){
         for (int i = 0; i < comprimento; i++){
             cout << sequencia[i] << endl;
         }
+        cout << "--" << endl;
     }
     else{
         for (int j = 0; j < tamanho; j++){
             cout << sequencia[j] << endl;
         }
+        cout << "--" << endl;
     }
 }
