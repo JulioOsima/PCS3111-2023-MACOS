@@ -5,3 +5,10 @@
 
 using namespace std;
 
+CircuitoMISO::CircuitoMISO() : Circuito(){
+
+}
+
+CircuitoMISO::~CircuitoMISO(){
+
+}

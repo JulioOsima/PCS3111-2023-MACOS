@@ -8,7 +8,7 @@ using namespace std;
 
 class Circuito{
 private:
-    static int ID;
+    
 
 
 public:

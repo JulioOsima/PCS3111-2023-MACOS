@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class CircuitoSISO:Circuito{ // A definicao de heranca está correta?
+class CircuitoSISO: public Circuito{ // A definicao de heranca está correta?
 private:
     /* data */
     
@@ -17,7 +17,7 @@ private:
 public:
     CircuitoSISO();
     virtual ~CircuitoSISO();
-    Sinal* processar(Sinal* sinalIN); //tornar abstrato
+    virtual Sinal* processar(Sinal* sinalIN) = 0; //tornar abstrato
 };
 
 #endif

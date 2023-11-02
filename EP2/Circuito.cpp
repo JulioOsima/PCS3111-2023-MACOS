@@ -22,7 +22,7 @@ void Circuito::imprimir(){
     cout << "Circuito com ID " << this->getID() << endl;
 }
 
-static int Circuito::getUltimoID(){ // pq o static da erro?
+int Circuito::getUltimoID(){ // pq o static da erro?
     if (/* verificar se nenhum circuito foi criado */){
         /* code */
     }

@@ -5,15 +5,10 @@
 
 using namespace std;
 
-CircuitoSISO::CircuitoSISO(){
+CircuitoSISO::CircuitoSISO() : Circuito(){
     // n faz nada
 }
 
 CircuitoSISO::~CircuitoSISO(){
     // tbm n faz nada
-}
-
-Sinal* CircuitoSISO::processar(Sinal* sinalIN){
-    // Esse metodo é abstrato, tem q estar definido aqui?
-
 }

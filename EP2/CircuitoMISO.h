@@ -18,7 +18,7 @@ private:
 public:
     CircuitoMISO(/* args */);
     virtual ~CircuitoMISO();
-    Sinal* processsar(Sinal* sinaIN1, Sinal* sinalIN2);
+    virtual Sinal* processar(Sinal* sinaIN1, Sinal* sinalIN2) = 0;
 };
 
 
