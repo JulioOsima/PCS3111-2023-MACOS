@@ -12,7 +12,7 @@ using namespace std;
 class Somador:public CircuitoMISO{
 private:
 
-
+// Adicionar alguma coisa aqui?
 
 public:
     Somador();
