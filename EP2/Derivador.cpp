@@ -1,8 +1,8 @@
 #include "Derivador.h"
 
-Derivador::Derivador(){
+Derivador::Derivador():CircuitoSISO(){
 
-// Definir como classe filha
+// pq da erro? que expressao é esperada?
 
 }
 

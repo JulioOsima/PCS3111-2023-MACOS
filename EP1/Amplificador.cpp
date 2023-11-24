@@ -19,7 +19,7 @@ Sinal* Amplificador::processar(Sinal* sinalIN){
     for (int i = 0; i < sinalIN->getComprimento(); i++){
         sequenciaAmplificada[i] = ganho * (sinalIN->getSequencia()[i]); 
     } 
-    return new Sinal(sequenciaAmplificada, sinalIN->getComprimento()); // DELETADO EM:
+    return new Sinal(sequenciaAmplificada, sinalIN->getComprimento()); // DELETADO EM: mmmmmmm
 }
 
 void Amplificador::setGanho(double ganho){

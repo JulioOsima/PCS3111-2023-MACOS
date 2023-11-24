@@ -19,7 +19,7 @@ private:
 
 public:
     Derivador();
-    virtual ~Derivador();
+    virtual ~Derivador();    
 };
 
 

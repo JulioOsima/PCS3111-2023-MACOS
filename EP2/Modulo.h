@@ -5,18 +5,21 @@
 #include "Sinal.h"
 #include <iostream>
 #include <string>
-#include <stdexcept>
+#include <list>
+
+using namespace std;
 
 class Modulo:public CircuitoSISO{
 private:
     /* data */
-    void imprimir();
+  list<CircuitoSISO*>* lista;
+
 
 public:
     Modulo();
     virtual ~Modulo();
     void adicionar(CircuitoSISO* circ);
-    list<CircuitoSISO*>* getCircuitos(); // pq o erro?
+    list<CircuitoSISO*>* getCircuitos();
 };
 
 

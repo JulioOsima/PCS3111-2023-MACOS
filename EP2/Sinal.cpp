@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Sinal::Sinal(double* sequencia, int comprimento) : comprimento(comprimento){
+Sinal::Sinal(double* sequencia, int comprimento) : comprimento(comprimento){ // retirar o try-catch e colocar no menu.cpp
     try{
         if (comprimento <= 0){
             throw new invalid_argument("comprimento menor que 0");
@@ -24,7 +24,7 @@ Sinal::Sinal(double* sequencia, int comprimento) : comprimento(comprimento){
     }
 }
 
-Sinal::Sinal(double constante, int comprimento) : comprimento(comprimento){
+Sinal::Sinal(double constante, int comprimento) : comprimento(comprimento){ // retirar o try-catch e colocar no menu.cpp
     try{
         if (comprimento <= 0){
             throw new invalid_argument("Comprimento menor que 0");

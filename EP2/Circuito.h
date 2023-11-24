@@ -9,7 +9,8 @@ using namespace std;
 class Circuito{
 private:
     
-
+int ID;
+static int proximoID;
 
 public:
     Circuito();

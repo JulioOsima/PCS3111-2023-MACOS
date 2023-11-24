@@ -1,8 +1,8 @@
 #include "Integrador.h"
 
-Integrador::Integrador(){
+Integrador::Integrador():CircuitoSISO(){
 
-// Definir como classe filha
+//
 
 }
 
