@@ -17,7 +17,8 @@ Sinal* Integrador::processar(Sinal* sinalIN){
     for (int i = 1; i < (sinalIN->getComprimento()); i++){
         sequenciaOUT[i] = sequenciaOUT[i - 1] + (sinalIN->getSequencia()[i]);
     }
-    
-    return new Sinal(sequenciaOUT, (sinalIN->getComprimento())); // DELETADO EM:
+    Sinal *sinalIntegrado = new Sinal(sequenciaOUT, sinalIN->getComprimento());
+    delete[] sequenciaOUT;
+    return sinalIntegrado;
 
 }

@@ -23,9 +23,10 @@ void Amplificador::setGanho(double ganho){
 
 Sinal* Amplificador::processar(Sinal* sinalIN){
     double* sequenciaAmplificada = new double[sinalIN->getComprimento()]; //DELETADO EM:
-
     for (int i = 0; i < sinalIN->getComprimento(); i++){
         sequenciaAmplificada[i] = ganho * (sinalIN->getSequencia()[i]); 
     } 
-    return new Sinal(sequenciaAmplificada, sinalIN->getComprimento()); // DELETADO EM:
+    Sinal *sinalAmplificado = new Sinal(sequenciaAmplificada, sinalIN->getComprimento());
+    delete[] sequenciaAmplificada;
+    return sinalAmplificado;
 }

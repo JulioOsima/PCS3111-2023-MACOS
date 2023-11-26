@@ -7,36 +7,23 @@
 using namespace std;
 
 Sinal::Sinal(double* sequencia, int comprimento) : comprimento(comprimento){ // retirar o try-catch e colocar no menu.cpp
-    try{
-        if (comprimento <= 0){
-            throw new invalid_argument("comprimento menor que 0");
-        }
-        // caso dê erro, devo fazer alguma coisa?
-
-        this->sequencia = new double[comprimento];
-        for (int i = 0; i < comprimento; i++){
-            this->sequencia[i] = sequencia[i];
-        }
+    if (comprimento <= 0){
+        throw new invalid_argument("comprimento menor que 0");
     }
-    catch(invalid_argument *e){
-        cout << "ERRO - comprimento menor q 0" << endl; // Retirar o printf
-        delete e;
+    // caso dê erro, devo fazer alguma coisa?
+
+    this->sequencia = new double[comprimento]; // Copia os valores do argumento sequencia para o atributo privado sequencia
+    for (int i = 0; i < comprimento; i++){
+        this->sequencia[i] = sequencia[i];
     }
 }
-
 Sinal::Sinal(double constante, int comprimento) : comprimento(comprimento){ // retirar o try-catch e colocar no menu.cpp
-    try{
-        if (comprimento <= 0){
-            throw new invalid_argument("Comprimento menor que 0");
-        }   
-        this->sequencia = new double[comprimento];
-        for (int i = 0; i < comprimento; i++){
-            this->sequencia[i] = constante;
-        }
-    }
-    catch(invalid_argument *e){
-        cout << "Erro - comprimento menor que 0" << endl; // Retirar o printf
-        delete e;
+    if (comprimento <= 0){
+        throw new invalid_argument("Comprimento menor que 0");
+    }   
+    this->sequencia = new double[comprimento];
+    for (int i = 0; i < comprimento; i++){
+        this->sequencia[i] = constante;
     }   
 }
 

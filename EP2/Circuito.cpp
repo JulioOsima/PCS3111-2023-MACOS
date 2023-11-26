@@ -10,8 +10,6 @@ Circuito::Circuito(){
 }
 
 Circuito::~Circuito(){
-
- // Como declarar o destrutor abstrato?
 }
 
 int Circuito::proximoID = 1;

@@ -15,11 +15,12 @@ private:
 
     double* sequenciaIN;
     double* sequenciaOUT;
-    Sinal* processar(Sinal* sinalIN);
+    
 
 public:
     Derivador();
     virtual ~Derivador();    
+    Sinal* processar(Sinal* sinalIN);
 };
 
 

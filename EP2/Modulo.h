@@ -20,6 +20,8 @@ public:
     virtual ~Modulo();
     void adicionar(CircuitoSISO* circ);
     list<CircuitoSISO*>* getCircuitos();
+    virtual Sinal* processar(Sinal* sinalIN) = 0; //tornar abstrato
+    void imprimir();
 };
 
 

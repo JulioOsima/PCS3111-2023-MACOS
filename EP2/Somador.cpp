@@ -31,8 +31,9 @@ Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
     for (int i = 0; i < comprimentoSoma; i++){
         sequenciaSomada[i] = sinalIN1->getSequencia()[i] + sinalIN2->getSequencia()[i];
     }
-
-    return new Sinal(sequenciaSomada, comprimentoSoma); // DELETADO EM:
+    Sinal *sinalSomado = new Sinal(sequenciaSomada, comprimentoSoma);
+    delete[] sequenciaSomada;
+    return sinalSomado;
 } 
 
 

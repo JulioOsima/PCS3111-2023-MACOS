@@ -1,28 +1,25 @@
 #include "Modulo.h"
 
 Modulo::Modulo():CircuitoSISO(){
-    list<CircuitoSISO*>::iterator it;
-    
-
+    lista = new list<CircuitoSISO*>();
 }
 
 Modulo::~Modulo(){
-    
+    delete lista;
+    // destruir o conteudo da lista
 }
 
 void Modulo::adicionar(CircuitoSISO* circ){
-
 // Adicionar o metodo
-
     lista->push_back(circ);
-
 }
 
 void Modulo::imprimir(){//Erro na definiçao de hereditariedade (avô)
 
     cout << "Modulo com ID " << this->getID() << " e:" << endl;
-    for (int i = 0; i < lista->size(); i++){
-        cout << "Circuito com ID "<< "/  como colocar o id desde o primeiro?   /" << endl;
+    list<CircuitoSISO*>::iterator i = lista->begin();
+    while (i != lista->end()){
+        cout << "Circuito com ID " << (*i)->getID() << endl;
     }
 }
 

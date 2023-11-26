@@ -8,10 +8,11 @@ class Integrador:public CircuitoSISO{
 private:
     /* data */
     double* sequenciaOUT;
-    Sinal* processar(Sinal* sinalIN);
+    
 public:
     Integrador();
     virtual ~Integrador();
+    Sinal* processar(Sinal* sinalIN);
 };
 
 
