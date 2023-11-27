@@ -1,10 +1,5 @@
 #include "Circuito.h"
 
-#include <iostream>
-#include <string>
-
-using namespace std;
-
 Circuito::Circuito(){
     ID = proximoID++;
 }
@@ -23,6 +18,10 @@ void Circuito::imprimir(){
 }
 
 int Circuito::getUltimoID(){ // pq o static da erro?
+    if (proximoID - 1 <= 0){
+        return 0;
+    }
+    
     return (proximoID - 1);
     
     // return o ultimo ID

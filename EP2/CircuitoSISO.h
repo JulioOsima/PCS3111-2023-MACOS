@@ -4,7 +4,6 @@
 #include "Sinal.h"
 #include "Circuito.h"
 #include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -18,6 +17,7 @@ public:
     CircuitoSISO();
     virtual ~CircuitoSISO();
     virtual Sinal* processar(Sinal* sinalIN) = 0; //tornar abstrato
+    void imprimir();
 };
 
 #endif

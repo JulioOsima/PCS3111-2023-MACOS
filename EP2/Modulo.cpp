@@ -5,22 +5,25 @@ Modulo::Modulo():CircuitoSISO(){
 }
 
 Modulo::~Modulo(){
+    while (lista->empty() == false){
+        CircuitoSISO *p = lista->front();
+        lista->pop_front();
+        delete p;
+    }
     delete lista;
-    // destruir o conteudo da lista
 }
 
 void Modulo::adicionar(CircuitoSISO* circ){
-// Adicionar o metodo
     lista->push_back(circ);
 }
 
-void Modulo::imprimir(){//Erro na definiçao de hereditariedade (avô)
-
+void Modulo::imprimir(){
     cout << "Modulo com ID " << this->getID() << " e:" << endl;
     list<CircuitoSISO*>::iterator i = lista->begin();
     while (i != lista->end()){
         cout << "Circuito com ID " << (*i)->getID() << endl;
     }
+    cout << "--" << endl;
 }
 
 list<CircuitoSISO*>* Modulo::getCircuitos(){

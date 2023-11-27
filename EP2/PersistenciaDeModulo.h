@@ -10,7 +10,7 @@ using namespace std;
 
 class PersistenciaDeModulo{
 private:
-    /* data */
+    string nomeDoArquivo;
 public:
     PersistenciaDeModulo(string nomeDoArquivo);
     virtual ~PersistenciaDeModulo();

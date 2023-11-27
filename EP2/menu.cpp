@@ -139,37 +139,30 @@ void simulacao2(Sinal* sinalIN){
     cout << endl;
     switch (escolha3){
     case 1:
-        // Criar objeto (modulo em serie)
         ModuloEmSerie* operacaoSNR = new ModuloEmSerie();
 
         operacao(operacaoSNR->getCircuitos());
-        Grafico* grafico = new Grafico("Resultado Final",operacaoSNR->processar(sinalIN)->getSequencia(),operacaoSNR->processar(sinalIN)->getComprimento());
-        grafico->plot();
+        operacaoSNR->processar(sinalIN)->imprimir("Resultado Final");
         salvarArquivo();
         delete operacaoSNR;
-        delete grafico;
         delete sinalIN;
         break;
     case 2:
-        // Criar objeto (modulo em paralelo)
         ModuloEmParalelo* operacaoPNR = new ModuloEmParalelo();
 
         operacao(operacaoPNR->getCircuitos());
-        Grafico* grafico = new Grafico("Resultado Final",operacaoPNR->processar(sinalIN)->getSequencia(),operacaoPNR->processar(sinalIN)->getComprimento());
-        grafico->plot();
+        operacaoPNR->processar(sinalIN)->imprimir("Resultado Final");
         salvarArquivo();
         delete operacaoPNR;
-        delete grafico;
         delete sinalIN;
         break;
     case 3:
-        // Criar objeto (modulo Realimentado)
         ModuloRealimentado* operacaoSR = new ModuloRealimentado();
-        Grafico* grafico = new Grafico("Resultado Final",operacaoSR->processar(sinalIN)->getSequencia(),operacaoSR->processar(sinalIN)->getComprimento());
-        grafico->plot();
+        
+        operacao(operacaoSR->getCircuitos());
+        operacaoSR->processar(sinalIN)->imprimir("Resultado Final");
         salvarArquivo();
         delete operacaoSR;
-        delete grafico;
         delete sinalIN;
         break;
     default:

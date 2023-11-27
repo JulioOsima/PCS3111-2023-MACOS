@@ -2,6 +2,8 @@
 #define MODULOREALIMENTADO_H
 
 #include "Modulo.h"
+#include "ModuloEmSerie.h"
+
 
 class ModuloRealimentado:public Modulo{
 private:

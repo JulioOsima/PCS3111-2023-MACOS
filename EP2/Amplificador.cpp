@@ -1,10 +1,5 @@
 #include "Amplificador.h"
 
-#include <iostream>
-#include <string>
-
-using namespace std;
-
 Amplificador::Amplificador(double ganho):CircuitoSISO(), ganho(ganho){
 // ...
 }

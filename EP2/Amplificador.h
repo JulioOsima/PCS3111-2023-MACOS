@@ -2,9 +2,7 @@
 #define AMPLIFICADOR_H
 
 #include "CircuitoSISO.h"
-
 #include <iostream>
-#include <string>
 
 using namespace std;
 

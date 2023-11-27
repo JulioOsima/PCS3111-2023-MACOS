@@ -1,25 +1,21 @@
 #include "Sinal.h"
 #include "Grafico.h"
 
-#include <iostream>
-#include <string>
-
-using namespace std;
 
 Sinal::Sinal(double* sequencia, int comprimento) : comprimento(comprimento){ // retirar o try-catch e colocar no menu.cpp
     if (comprimento <= 0){
-        throw new invalid_argument("comprimento menor que 0");
+        throw new invalid_argument("comprimento menor ou igual a 0");
     }
-    // caso dê erro, devo fazer alguma coisa?
 
     this->sequencia = new double[comprimento]; // Copia os valores do argumento sequencia para o atributo privado sequencia
     for (int i = 0; i < comprimento; i++){
         this->sequencia[i] = sequencia[i];
     }
+    delete[] sequencia;
 }
 Sinal::Sinal(double constante, int comprimento) : comprimento(comprimento){ // retirar o try-catch e colocar no menu.cpp
     if (comprimento <= 0){
-        throw new invalid_argument("Comprimento menor que 0");
+        throw new invalid_argument("Comprimento menor ou igual a 0");
     }   
     this->sequencia = new double[comprimento];
     for (int i = 0; i < comprimento; i++){

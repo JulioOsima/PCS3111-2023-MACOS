@@ -9,16 +9,11 @@
 
 class ModuloEmSerie:public Modulo{
 private:
-    /* data */
+
 public:
     ModuloEmSerie();
     virtual ~ModuloEmSerie();
     Sinal* processar(Sinal* sinalIN);
-
 };
-
-
-
-
 
 #endif

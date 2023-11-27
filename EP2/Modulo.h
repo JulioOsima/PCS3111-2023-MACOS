@@ -4,7 +4,6 @@
 #include "CircuitoSISO.h"
 #include "Sinal.h"
 #include <iostream>
-#include <string>
 #include <list>
 
 using namespace std;

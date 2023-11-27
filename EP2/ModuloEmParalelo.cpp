@@ -1,12 +1,9 @@
 #include "ModuloEmParalelo.h"
-#include "Somador.h"
 
-ModuloEmParalelo::ModuloEmParalelo(){ //definir hereditariedade
-
+ModuloEmParalelo::ModuloEmParalelo():Modulo(){ 
 }
 
-ModuloEmParalelo::~ModuloEmParalelo(){
-    
+ModuloEmParalelo::~ModuloEmParalelo(){   
 }
 
 Sinal* ModuloEmParalelo::processar(Sinal* sinalIN){
@@ -33,13 +30,15 @@ Sinal* ModuloEmParalelo::processar(Sinal* sinalIN){
     Somador* sum = new Somador();
     while (i != getCircuitos()->end()){
         listaDeParalelos->push_back((*i)->processar(sinalIN));
+        i++;
     }
-    for (k = listaDeParalelos->begin(); k != listaDeParalelos->end(); k++){
+    while (k != listaDeParalelos->end()){
         sinalDeSaida = sum->processar((*k),(*(k++))); // Funciona?
     }
 
     delete[] sequenciaDeSaida;
     delete listaDeParalelos;
+    delete sum;
 
     return sinalDeSaida;
 }

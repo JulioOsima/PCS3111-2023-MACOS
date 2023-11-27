@@ -3,9 +3,7 @@
 
 #include "Sinal.h"
 #include "Circuito.h"
-
 #include <iostream>
-#include <string>
 
 using namespace std;
 

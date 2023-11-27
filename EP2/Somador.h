@@ -2,10 +2,7 @@
 #define SOMADOR_H
 
 #include "CircuitoMISO.h"
-
-
 #include <iostream>
-#include <string>
 
 using namespace std;
 

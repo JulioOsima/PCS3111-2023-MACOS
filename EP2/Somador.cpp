@@ -1,10 +1,5 @@
 #include "Somador.h"
 
-#include <iostream>
-#include <string>
-
-using namespace std;
-
 Somador::Somador() : CircuitoMISO(){
 
 }

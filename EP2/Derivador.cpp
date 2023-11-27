@@ -1,13 +1,9 @@
 #include "Derivador.h"
 
 Derivador::Derivador():CircuitoSISO(){
-
-// pq da erro? que expressao é esperada?
-
 }
 
 Derivador::~Derivador(){
-
 }
 
 Sinal* Derivador::processar(Sinal* sinalIN){
@@ -19,7 +15,7 @@ Sinal* Derivador::processar(Sinal* sinalIN){
     for (int i = 1; i < sinalIN->getComprimento(); i++){
         sequenciaOUT[i] = (sequenciaIN[i] - sequenciaIN[i - 1]);
     }
-    Sinal *sinalDerivado = new Sinal(sequenciaOUT, sinalIN->getComprimento());
+    Sinal *sinalDerivado = new Sinal(sequenciaOUT, sinalIN->getComprimento()); // Criar o atributo sinalDerivado em private para poder deletar ele no destrutor?
     delete[] sequenciaIN;
     delete[] sequenciaOUT;
     return sinalDerivado;
