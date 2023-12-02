@@ -1,5 +1,5 @@
 #ifndef DERIVADOR_H
-#define DERIVADOR.H
+#define DERIVADOR_H
 
 #include "CircuitoSISO.h"
 #include "Sinal.h"

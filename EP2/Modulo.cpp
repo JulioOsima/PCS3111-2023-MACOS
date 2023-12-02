@@ -22,8 +22,10 @@ void Modulo::imprimir(){
     list<CircuitoSISO*>::iterator i = lista->begin();
     while (i != lista->end()){
         cout << "Circuito com ID " << (*i)->getID() << endl;
+        i++;
     }
     cout << "--" << endl;
+
 }
 
 list<CircuitoSISO*>* Modulo::getCircuitos(){

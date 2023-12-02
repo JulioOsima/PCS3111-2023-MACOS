@@ -18,7 +18,7 @@ using namespace std;
 Sinal *aquisicao(){ // Função para aquisição de sinais
     int escolha2;
     double *sequencia = new double[60];
-    cout << "Qual sinal voce gostaria de utilizar como entrada da sua simulcao?" << endl
+    cout << "Qual sinal voce gostaria de utilizar como entrada da sua simulacao?" << endl
          << "1) 5+3*cos(n*pi/8)" << endl
          << "2) constante" << endl
          << "3) rampa" << endl
@@ -26,23 +26,23 @@ Sinal *aquisicao(){ // Função para aquisição de sinais
     cin >> escolha2;
     cout << endl;
     switch (escolha2){
-    case 1:
+    case 1:{
         for (int i = 0; i < 60; i++){
             sequencia[i] = 5 + 3 * cos(i*M_PI/8);
         }
         Sinal *sinalAdquirido1 = new Sinal(sequencia, 60);
-        delete[] sequencia;
         return sinalAdquirido1;
-    case 2:
+    }
+    case 2:{
         double c;
         cout << "Qual o valor dessa constante?" << endl
              << "C = ";
         cin >> c;
         cout << endl;
         Sinal *sinalAdquirido2 = new Sinal(c, 60);
-        delete[] sequencia;
         return sinalAdquirido2;
-    case 3:
+    }    
+    case 3:{
         double a;
         cout << "Qual a inclinacao dessa rampa?" << endl 
              << "a = ";
@@ -52,15 +52,15 @@ Sinal *aquisicao(){ // Função para aquisição de sinais
             sequencia[i] = i * a;           
         }
         Sinal *sinalAdquirido3 = new Sinal(sequencia, 60);
-        delete[] sequencia;
         return sinalAdquirido3;
+    }    
     default:
         delete[] sequencia;
         return 0;
     }
 }
 
-void operacao(list<CircuitoSISO*>* listaDeOperacoes){ // Função para operações
+void operacao(Modulo *modulo){ // Função para operações, adiociona as operacoes à lista do modulo
     int escolha4;
     int escolha5 = 1;
     while (escolha5 == 1){
@@ -72,36 +72,39 @@ void operacao(list<CircuitoSISO*>* listaDeOperacoes){ // Função para operaçõ
         cin >> escolha4;
         cout << endl;
         switch (escolha4){
-        case 1:
+        case 1:{
             double g;
             cout << "Qual o ganho dessa amplificacao?" << endl
                  << "g = ";
             cin >> g;
             cout << endl;
             Amplificador* amplificador = new Amplificador(g);
-            listaDeOperacoes->push_back(amplificador);
+            modulo->adicionar(amplificador); // !!!!!!!!
             break;
-        case 2:
+        }
+        case 2:{
             Derivador* derivador = new Derivador();
-            listaDeOperacoes->push_back(derivador);
+            modulo->adicionar(derivador);
             break;
-        case 3:
+        }
+        case 3:{
             Integrador* integrador = new Integrador;
-            listaDeOperacoes->push_back(integrador);
+            modulo->adicionar(integrador);
             break;
+        }
         default:
             break;
         }
         cout << "O que voce quer fazer agora?" << endl
              << "1) Realizar mais uma operacao no resultado" << endl
-             << "2) Imorimir o reultado" << endl
+             << "2) Imprimir o resultado" << endl
              << "Escolha: ";
         cin >> escolha5;
         cout << endl;    
     }
 }
 
-void salvarArquivo(){
+void salvarArquivo(Modulo *modulo){
     int escolha6;
     string nomeDoArquivo;
     cout << "Voce gostaria de salvar o circuito em um novo arquivo?" << endl
@@ -110,17 +113,20 @@ void salvarArquivo(){
          << "Escolha: ";
     cin >> escolha6;
     cout << endl;
+    PersistenciaDeModulo* save = new PersistenciaDeModulo(nomeDoArquivo);
     switch (escolha6){
     case 1:
         cout << "Qual o nome do arquivo a ser escrito?" << endl
              << "Nome: ";
         cin >> nomeDoArquivo;
         cout << endl;
-
-        // salvar o arquivo
+        try{
+            save->salvarEmAquivo(modulo);
+        }
+        catch(logic_error *e){
+        }
         break;
     case 2:
-        cout << endl;
         break;
     default:
         break;
@@ -138,38 +144,51 @@ void simulacao2(Sinal* sinalIN){
     cin >> escolha3;
     cout << endl;
     switch (escolha3){
-    case 1:
+    case 1:{
         ModuloEmSerie* operacaoSNR = new ModuloEmSerie();
 
-        operacao(operacaoSNR->getCircuitos());
-        operacaoSNR->processar(sinalIN)->imprimir("Resultado Final");
-        salvarArquivo();
-        delete operacaoSNR;
-        delete sinalIN;
+        operacao(operacaoSNR);
+        try{
+            operacaoSNR->processar(sinalIN)->imprimir("Resultado Final");
+        }
+        catch(logic_error *e){   
+        }
+        salvarArquivo(operacaoSNR);
+        delete operacaoSNR; // VERIFICAR
+        // delete sinalIN; implica double freed variable
         break;
-    case 2:
+    }
+    case 2:{
         ModuloEmParalelo* operacaoPNR = new ModuloEmParalelo();
 
-        operacao(operacaoPNR->getCircuitos());
-        operacaoPNR->processar(sinalIN)->imprimir("Resultado Final");
-        salvarArquivo();
+        operacao(operacaoPNR);
+        try{
+            operacaoPNR->processar(sinalIN)->imprimir("Resultado Final");
+        }
+        catch(logic_error *e){
+        }
+        salvarArquivo(operacaoPNR);
         delete operacaoPNR;
-        delete sinalIN;
+        //delete sinalIN;
         break;
-    case 3:
+    }
+    case 3:{
         ModuloRealimentado* operacaoSR = new ModuloRealimentado();
         
-        operacao(operacaoSR->getCircuitos());
-        operacaoSR->processar(sinalIN)->imprimir("Resultado Final");
-        salvarArquivo();
+        operacao(operacaoSR);
+        try{
+            operacaoSR->processar(sinalIN)->imprimir("Resultado Final");
+        }
+        catch(logic_error *e){
+        }
+        salvarArquivo(operacaoSR);
         delete operacaoSR;
-        delete sinalIN;
+        //delete sinalIN;
         break;
+    }
     default:
         break;
     }
-    
-
 }
 
 
@@ -189,14 +208,17 @@ void menu(){
     delete[] sequenciaDeEntrada;
 
     switch (escolha1){
-    case 1: // Simulacao 1 - Circuito advindo de aquivo
+    case 1:{ // Simulacao 1 - Circuito advindo de aquivo
+
         // utiliza o (sinal de entrada) no arquivo lido
         // imprimir o sinal de saida titulo: Resultado Final
-        salvarArquivo();
+        //salvarArquivo();
         break;
-    case 2: // Simulcao 2 - Sequencia propria de operacoes
+    }
+    case 2:{ // Simulcao 2 - Sequencia propria de operacoes
         simulacao2(sinalDeEntrada);
          break;
+    }
     default:
         break;
     }

@@ -4,19 +4,16 @@ Derivador::Derivador():CircuitoSISO(){
 }
 
 Derivador::~Derivador(){
+    delete[] sequenciaOUT;
 }
 
 Sinal* Derivador::processar(Sinal* sinalIN){
-    sequenciaIN = new double[sinalIN->getComprimento()]; // DELETADO EM: 
     sequenciaOUT = new double[sinalIN->getComprimento()]; // DELETADO EM:
-    
-    sequenciaOUT[0] = sequenciaIN[0];
+    sequenciaOUT[0] = sinalIN->getSequencia()[0];
 
     for (int i = 1; i < sinalIN->getComprimento(); i++){
-        sequenciaOUT[i] = (sequenciaIN[i] - sequenciaIN[i - 1]);
+        sequenciaOUT[i] = (sinalIN->getSequencia()[i] - sinalIN->getSequencia()[i - 1]);
     }
     Sinal *sinalDerivado = new Sinal(sequenciaOUT, sinalIN->getComprimento()); // Criar o atributo sinalDerivado em private para poder deletar ele no destrutor?
-    delete[] sequenciaIN;
-    delete[] sequenciaOUT;
     return sinalDerivado;
 }

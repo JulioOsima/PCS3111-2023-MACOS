@@ -1,16 +1,33 @@
 #include "ModuloEmParalelo.h"
+#include <iostream>
+
+using namespace std;
 
 ModuloEmParalelo::ModuloEmParalelo():Modulo(){ 
 }
 
 ModuloEmParalelo::~ModuloEmParalelo(){   
+    list<Sinal*>::iterator k = listaDeParalelos->begin();
+    while (listaDeParalelos->empty() == false){
+        Sinal *p = listaDeParalelos->front();
+        listaDeParalelos->pop_front();
+        delete p;
+    }
+    delete[] sequenciaDeSaida;
+    delete listaDeParalelos;   
+     while (this->getCircuitos()->empty() == false){
+         CircuitoSISO *p = this->getCircuitos()->front();
+        this->getCircuitos()->pop_front();
+        delete p;
+    }
+    delete this->getCircuitos();
 }
 
 Sinal* ModuloEmParalelo::processar(Sinal* sinalIN){
-    list<CircuitoSISO*>::iterator i = getCircuitos()->begin();
+    list<CircuitoSISO*>::iterator i = this->getCircuitos()->begin();
     bool listaVazia = true;
 
-    while (i != getCircuitos()->end()){
+    while (i != this->getCircuitos()->end()){
         if ((*i) != nullptr){
             listaVazia = false;
         }   
@@ -21,23 +38,25 @@ Sinal* ModuloEmParalelo::processar(Sinal* sinalIN){
     return 0;
     }
    
-    double *sequenciaDeSaida = new double[60];
-    Sinal* sinalDeSaida = new Sinal(sequenciaDeSaida, 60);
-    i = getCircuitos()->begin();
+    sequenciaDeSaida = new double[sinalIN->getComprimento()];
+    Sinal* sinalDeSaida = new Sinal(sequenciaDeSaida, sinalIN->getComprimento());
+    i = this->getCircuitos()->begin();
+
     listaDeParalelos = new list<Sinal*>();
     list<Sinal*>::iterator k = listaDeParalelos->begin();
 
-    Somador* sum = new Somador();
-    while (i != getCircuitos()->end()){
+    while (i != this->getCircuitos()->end()){
         listaDeParalelos->push_back((*i)->processar(sinalIN));
         i++;
     }
+    Somador* sum = new Somador();
+    k = listaDeParalelos->begin();
+    sinalDeSaida = sum->processar((*k), (*k++));
     while (k != listaDeParalelos->end()){
-        sinalDeSaida = sum->processar((*k),(*(k++))); // Funciona?
+        sinalDeSaida = sum->processar((*k), sinalDeSaida); // Funciona?
+        k++;
     }
 
-    delete[] sequenciaDeSaida;
-    delete listaDeParalelos;
     delete sum;
 
     return sinalDeSaida;

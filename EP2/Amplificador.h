@@ -9,6 +9,7 @@ using namespace std;
 class Amplificador:public CircuitoSISO{
 private:
     double ganho;
+    double* sequenciaAmplificada;
     
 public:
     Amplificador(double ganho);

@@ -5,12 +5,11 @@ Somador::Somador() : CircuitoMISO(){
 }
 
 Somador::~Somador(){
-
+delete[] sequenciaSomada;
 }
 
 Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
-    // Somar casa com casa dos vetores
-    // igual o EP1
+    // O q fazer se o metodo receber apenas um sinal??????
     
    int comprimentoSoma;
 
@@ -21,13 +20,12 @@ Sinal* Somador::processar(Sinal* sinalIN1, Sinal* sinalIN2){
         comprimentoSoma = (sinalIN1->getComprimento());
     }
     
-    double* sequenciaSomada = new double[comprimentoSoma]; // DELETADO EM:
+    sequenciaSomada = new double[comprimentoSoma]; // DELETADO EM:
 
     for (int i = 0; i < comprimentoSoma; i++){
         sequenciaSomada[i] = sinalIN1->getSequencia()[i] + sinalIN2->getSequencia()[i];
     }
     Sinal *sinalSomado = new Sinal(sequenciaSomada, comprimentoSoma);
-    delete[] sequenciaSomada;
     return sinalSomado;
 } 
 

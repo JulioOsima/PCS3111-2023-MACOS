@@ -8,7 +8,7 @@ using namespace std;
 
 class Somador:public CircuitoMISO{
 private:
-
+double* sequenciaSomada;
 // Adicionar alguma coisa aqui?
 
 public:

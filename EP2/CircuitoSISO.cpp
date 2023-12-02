@@ -9,5 +9,5 @@ CircuitoSISO::~CircuitoSISO(){
 }
 
 void CircuitoSISO::imprimir(){
-    
+    cout << "Teste Y" << endl;
 }

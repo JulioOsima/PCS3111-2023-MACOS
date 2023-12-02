@@ -11,7 +11,6 @@ Sinal::Sinal(double* sequencia, int comprimento) : comprimento(comprimento){ // 
     for (int i = 0; i < comprimento; i++){
         this->sequencia[i] = sequencia[i];
     }
-    delete[] sequencia;
 }
 Sinal::Sinal(double constante, int comprimento) : comprimento(comprimento){ // retirar o try-catch e colocar no menu.cpp
     if (comprimento <= 0){

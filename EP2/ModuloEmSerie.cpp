@@ -4,12 +4,18 @@ ModuloEmSerie::ModuloEmSerie():Modulo(){
 }
 
 ModuloEmSerie::~ModuloEmSerie(){
+    while (this->getCircuitos()->empty() == false){
+         CircuitoSISO *p = this->getCircuitos()->front();
+        this->getCircuitos()->pop_front();
+        delete p;
+    }
+    delete this->getCircuitos();
 }
 
-Sinal* ModuloEmSerie::processar(Sinal* SinalIN){ 
-    list<CircuitoSISO*>::iterator i = getCircuitos()->begin();
+Sinal* ModuloEmSerie::processar(Sinal* sinalIN){ 
+    list<CircuitoSISO*>::iterator i = this->getCircuitos()->begin();
     bool listaVazia = true;
-    while (i != getCircuitos()->end()){
+    while (i != this->getCircuitos()->end()){
         if ((*i) != nullptr){
             listaVazia = false;
         }   
@@ -19,10 +25,12 @@ Sinal* ModuloEmSerie::processar(Sinal* SinalIN){
         throw new logic_error("Não possui ciruitos SISO");
         return 0;
     }
-    i = getCircuitos()->begin();
-    while (i != getCircuitos()->end()){
-        SinalIN = (*i)->processar(SinalIN);
+    i = this->getCircuitos()->begin();
+    while (i!= this->getCircuitos()->end()){
+        sinalIN = (*i)->processar(sinalIN);
+        sinalIN->imprimir();
+        i++;
     }
-    return SinalIN;
+    return sinalIN;// usei o msm sinal
 }
    

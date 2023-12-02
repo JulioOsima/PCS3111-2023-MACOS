@@ -10,6 +10,7 @@
 class ModuloEmParalelo:public Modulo{
 private:
     list<Sinal*>* listaDeParalelos;
+    double *sequenciaDeSaida;
 public:
     ModuloEmParalelo();
     virtual ~ModuloEmParalelo();
