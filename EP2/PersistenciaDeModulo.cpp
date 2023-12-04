@@ -19,7 +19,7 @@ PersistenciaDeModulo::~PersistenciaDeModulo(){
 string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
     string tipo;
     double g = 0;
-    Amplificador *a1 = new Amplificador(g);
+    
     if (dynamic_cast<Integrador*>(circuito)){
         tipo = "I";
         return tipo;
@@ -29,12 +29,11 @@ string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
         tipo = "D";
         return tipo;
     }
-    
+    Amplificador *a1 = new Amplificador(g);
     a1 = dynamic_cast<Amplificador*>(circuito);
     if (a1 != NULL){
         string ganho;
-        tipo = "A";
-        tipo = tipo + " ";
+        tipo = "A ";
         tipo = tipo + to_string(a1->getGanho());
         return tipo;
     }

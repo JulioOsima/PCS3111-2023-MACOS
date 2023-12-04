@@ -15,6 +15,14 @@
 
 using namespace std;
 
+//
+//  Verificar os deletes 
+//  Adicionar o metodo do modulo realimentado
+//  Adicionar a funcao de ler modulo de arquivo
+//  Verificar os possiveis erros de input
+//  Formatar o codigo: identaçao e retirar os comentarios inuteis e adicionar os comentarios uteis
+//
+
 Sinal *aquisicao(){ // Função para aquisição de sinais
     int escolha2;
     double *sequencia = new double[60];
@@ -104,7 +112,7 @@ void operacao(Modulo *modulo){ // Função para operações, adiociona as operac
     }
 }
 
-void salvarArquivo(Modulo *modulo){
+void save(Modulo *modulo){
     int escolha6;
     string nomeDoArquivo;
     cout << "Voce gostaria de salvar o circuito em um novo arquivo?" << endl
@@ -156,7 +164,7 @@ void simulacao2(Sinal* sinalIN){
         }
         catch(logic_error *e){   
         }
-        salvarArquivo(operacaoSNR);
+        save(operacaoSNR);
         delete operacaoSNR; // VERIFICAR
         // delete sinalIN; implica double freed variable
         break;
@@ -170,7 +178,7 @@ void simulacao2(Sinal* sinalIN){
         }
         catch(logic_error *e){
         }
-        salvarArquivo(operacaoPNR);
+        save(operacaoPNR);
         delete operacaoPNR;
         //delete sinalIN;
         break;
@@ -184,7 +192,7 @@ void simulacao2(Sinal* sinalIN){
         }
         catch(logic_error *e){
         }
-        salvarArquivo(operacaoSR);
+        save(operacaoSR);
         delete operacaoSR;
         //delete sinalIN;
         break;
