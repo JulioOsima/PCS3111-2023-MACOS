@@ -15,12 +15,6 @@ ModuloEmParalelo::~ModuloEmParalelo(){
     }
     delete[] sequenciaDeSaida;
     delete listaDeParalelos;   
-     while (this->getCircuitos()->empty() == false){
-         CircuitoSISO *p = this->getCircuitos()->front();
-        this->getCircuitos()->pop_front();
-        delete p;
-    }
-    delete this->getCircuitos();
 }
 
 Sinal* ModuloEmParalelo::processar(Sinal* sinalIN){

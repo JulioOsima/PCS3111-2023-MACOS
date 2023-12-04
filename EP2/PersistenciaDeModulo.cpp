@@ -2,7 +2,7 @@
 
 PersistenciaDeModulo::PersistenciaDeModulo(string nomeDoArquivo){
     this->nomeDoArquivo = nomeDoArquivo;
-    nomeDoArquivo = nomeDoArquivo + ".txt"; // verificar
+    nomeDoArquivo = nomeDoArquivo + ".txt";
     listaDeModulos = new list<Modulo*>;
 }
 
@@ -15,9 +15,10 @@ PersistenciaDeModulo::~PersistenciaDeModulo(){
     delete listaDeModulos;
 
 } 
+
 string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
     string tipo;
-    double g;
+    double g = 0;
     Amplificador *a1 = new Amplificador(g);
     if (dynamic_cast<Integrador*>(circuito)){
         tipo = "I";
@@ -33,10 +34,11 @@ string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
     if (a1 != NULL){
         string ganho;
         tipo = "A";
+        tipo = tipo + " ";
         tipo = tipo + to_string(a1->getGanho());
-        delete a1;
         return tipo;
     }
+    return NULL;
 }
 
 void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
@@ -47,7 +49,6 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
         cout << "Erro ao escrever" << endl;
         throw new logic_error("erro");
     }
-
     if (dynamic_cast<ModuloEmSerie*>(mod)){
         arquivoSalvo << "S" << endl;
     }
@@ -57,18 +58,17 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
     if (dynamic_cast<ModuloRealimentado*>(mod)){
         arquivoSalvo << "R" << endl;
     }
-
     list<CircuitoSISO*>::iterator i = mod->getCircuitos()->begin();
 
     while (i != mod->getCircuitos()->end()){
         arquivoSalvo << verificaModulo((*i)) << endl;
+        i++;
     }
     arquivoSalvo << "f";
     arquivoSalvo.close();
 }
 
 Modulo* PersistenciaDeModulo::lerArquivo( ){
-    // Adicionar metodo
     ifstream arquivoLido;
     arquivoLido.open(nomeDoArquivo);
 
@@ -85,5 +85,5 @@ Modulo* PersistenciaDeModulo::lerArquivo( ){
     }
     
 
-    
+return 0;    
 }

@@ -113,19 +113,22 @@ void salvarArquivo(Modulo *modulo){
          << "Escolha: ";
     cin >> escolha6;
     cout << endl;
-    PersistenciaDeModulo* save = new PersistenciaDeModulo(nomeDoArquivo);
+    
     switch (escolha6){
-    case 1:
+    case 1:{
         cout << "Qual o nome do arquivo a ser escrito?" << endl
              << "Nome: ";
         cin >> nomeDoArquivo;
         cout << endl;
+        PersistenciaDeModulo* save = new PersistenciaDeModulo(nomeDoArquivo);
         try{
             save->salvarEmAquivo(modulo);
         }
         catch(logic_error *e){
         }
+        delete save;
         break;
+    }    
     case 2:
         break;
     default:

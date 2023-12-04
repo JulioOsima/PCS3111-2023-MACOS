@@ -4,12 +4,6 @@ ModuloEmSerie::ModuloEmSerie():Modulo(){
 }
 
 ModuloEmSerie::~ModuloEmSerie(){
-    while (this->getCircuitos()->empty() == false){
-         CircuitoSISO *p = this->getCircuitos()->front();
-        this->getCircuitos()->pop_front();
-        delete p;
-    }
-    delete this->getCircuitos();
 }
 
 Sinal* ModuloEmSerie::processar(Sinal* sinalIN){ 
