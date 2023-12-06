@@ -3,6 +3,7 @@
 
 #include "Modulo.h"
 #include "ModuloEmSerie.h"
+#include "Somador.h"
 
 
 class ModuloRealimentado:public Modulo{

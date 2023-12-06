@@ -22,7 +22,7 @@ Sinal* ModuloEmSerie::processar(Sinal* sinalIN){
     i = this->getCircuitos()->begin();
     while (i!= this->getCircuitos()->end()){
         sinalIN = (*i)->processar(sinalIN);
-        sinalIN->imprimir();
+        sinalIN->imprimir();// pq esse imprimir esta aqui?
         i++;
     }
     return sinalIN;// usei o msm sinal
