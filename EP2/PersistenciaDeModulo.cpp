@@ -47,6 +47,7 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
     if (arquivoSalvo.fail()){
         cout << "Erro ao escrever" << endl;
         throw new logic_error("erro");
+        // fechar o arquivo?
     }
     if (dynamic_cast<ModuloEmSerie*>(mod)){
         arquivoSalvo << "S" << endl;
@@ -54,8 +55,19 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
     if (dynamic_cast<ModuloEmParalelo*>(mod)){
         arquivoSalvo << "P" << endl;
     }
-    if (dynamic_cast<ModuloRealimentado*>(mod)){
+    ModuloRealimentado* modTipoRealimentado = new ModuloRealimentado();
+    modTipoRealimentado = dynamic_cast<ModuloRealimentado*>(mod);
+    if (modTipoRealimentado != NULL){
         arquivoSalvo << "R" << endl;
+        list<ModuloEmSerie*>::iterator k = modTipoRealimentado->getCircuitos()->begin(); // lista de modulos em serie 
+        list<CircuitoSISO*>::iterator l = (*k)->getCircuitos()->begin();
+        while (l != (*k)->getCircuitos()->end()){
+        arquivoSalvo << verificaModulo((*l)) << endl;
+        l++;
+        }
+        arquivoSalvo << "f" << endl;
+        delete modTipoRealimentado;
+        arquivoSalvo.close();
     }
     list<CircuitoSISO*>::iterator i = mod->getCircuitos()->begin();
 

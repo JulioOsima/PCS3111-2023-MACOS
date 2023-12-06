@@ -17,7 +17,7 @@ using namespace std;
 
 //
 //  Verificar os deletes 
-//  Adicionar o metodo do modulo realimentado
+//  Adicionar o metodo do modulo realimentado - Aparentemente resolvido
 //  Adicionar a funcao de ler modulo de arquivo
 //  Verificar os possiveis erros de input
 //  Formatar o codigo: identaçao e retirar os comentarios inuteis e adicionar os comentarios uteis
@@ -185,8 +185,10 @@ void simulacao2(Sinal* sinalIN){
     }
     case 3:{
         ModuloRealimentado* operacaoSR = new ModuloRealimentado();
+        ModuloEmSerie* moduloEmSerieRealimentado = new ModuloEmSerie();
         
-        operacao(operacaoSR);
+        operacao(moduloEmSerieRealimentado);
+        operacaoSR->adicionar(moduloEmSerieRealimentado);
         try{
             operacaoSR->processar(sinalIN)->imprimir("Resultado Final");
         }

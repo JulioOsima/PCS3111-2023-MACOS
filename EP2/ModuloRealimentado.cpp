@@ -36,6 +36,7 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
 
     list<ModuloEmSerie*>::iterator k = listaDeMS->begin();
     saida = (*k)->processar(diferenca);
+    k++;
     delete diferenca;
 
     Amplificador* inversor = new Amplificador(-1);
@@ -45,7 +46,7 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
         saidaInvertida = new Sinal(sequenciaSaidaInvertida, i + 1);
         diferenca = somaEntradaESaidaInvertida->processar(sinalIN, saidaInvertida);
         delete saida;
-        saida = new Sinal(diferenca->getSequencia(), diferenca->getComprimento());
+        saida = new Sinal((*k)->processar(diferenca)->getSequencia(), (*k)->processar(diferenca)->getComprimento());
         delete saidaInvertida;
         delete diferenca;
     }
