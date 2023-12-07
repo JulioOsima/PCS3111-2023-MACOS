@@ -10,20 +10,24 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <vector>
 
 using namespace std;
 
 class PersistenciaDeModulo{
 private:
     string nomeDoArquivo;
-    list<Modulo*>* listaDeModulos;
+    vector<Modulo*>* vectorDeModulos;
+    vector<string>* vectorDestrings;
+    void adicionaCircuitos(Modulo* modulo, int a, int b);
+    int k;
+    void procuraModuloInterno(string moduloAtual, int a, int b);
     string verificaModulo(CircuitoSISO* circuito);
-    
 public:
     PersistenciaDeModulo(string nomeDoArquivo);
     virtual ~PersistenciaDeModulo();
     void salvarEmAquivo(Modulo* mod);
-    Modulo* lerArquivo();
+    Modulo* lerDeArquivo();
 };
 
 #endif

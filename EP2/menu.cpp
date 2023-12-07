@@ -21,6 +21,7 @@ using namespace std;
 //  Adicionar a funcao de ler modulo de arquivo
 //  Verificar os possiveis erros de input
 //  Formatar o codigo: identaçao e retirar os comentarios inuteis e adicionar os comentarios uteis
+//  adicionar os try and catch toda vez que for criar um sinal
 //
 
 Sinal *aquisicao(){ // Função para aquisição de sinais
@@ -226,6 +227,15 @@ void menu(){
         // utiliza o (sinal de entrada) no arquivo lido
         // imprimir o sinal de saida titulo: Resultado Final
         //salvarArquivo();
+        string nomeDoArquivo;
+        cout << "Qual o nome do arquivo a ser lido?" << endl
+             << "Nome: " << endl;
+        cin >> nomeDoArquivo;
+
+        PersistenciaDeModulo* arquivoParaLer = new PersistenciaDeModulo(nomeDoArquivo);
+        arquivoParaLer->lerDeArquivo();
+
+
         break;
     }
     case 2:{ // Simulcao 2 - Sequencia propria de operacoes

@@ -2,17 +2,18 @@
 
 PersistenciaDeModulo::PersistenciaDeModulo(string nomeDoArquivo){
     this->nomeDoArquivo = nomeDoArquivo;
-    nomeDoArquivo = nomeDoArquivo + ".txt";
-    listaDeModulos = new list<Modulo*>;
+    //nomeDoArquivo = nomeDoArquivo + ".txt";
+    vectorDeModulos = new vector<Modulo*>();
+    
 }
 
 PersistenciaDeModulo::~PersistenciaDeModulo(){
-    while (listaDeModulos->empty() == false){
+    /*while (listaDeModulos->empty() == false){
         Modulo* p = listaDeModulos->front();
         listaDeModulos->pop_front();
         delete p;
     }
-    delete listaDeModulos;
+    delete listaDeModulos;*/
 
 } 
 
@@ -40,7 +41,7 @@ string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
     return NULL;
 }
 
-void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
+void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){\
     ofstream arquivoSalvo;
     arquivoSalvo.open(nomeDoArquivo);
 
@@ -79,22 +80,129 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
     arquivoSalvo.close();
 }
 
-Modulo* PersistenciaDeModulo::lerArquivo( ){
+void PersistenciaDeModulo::adicionaCircuitos(Modulo* modulo, int a, int b){
+    a++;
+    b--;
+    for (int i = a; i < b; i++){
+        if (vectorDestrings->at(i) == "A");{
+            Amplificador* amplificador = new Amplificador(2);
+            modulo->adicionar(amplificador);
+        }
+        if (vectorDestrings->at(i) == "D");{
+            Derivador* derivador = new Derivador();
+            modulo->adicionar(derivador);
+        }
+        if (vectorDestrings->at(i) == "I");{
+            Integrador* integrador = new Integrador();
+            modulo->adicionar(integrador);
+        }
+        if (vectorDestrings->at(i) == "M"){
+            modulo->adicionar(vectorDeModulos->at(k));
+        }
+    }
+    vectorDeModulos->at(k) = modulo;
+    k++;
+    b++;
+    vectorDestrings->at(a) = "M";
+    a++;
+    if (b - 1 != vectorDestrings->size()){
+        for (int j = a; j < vectorDestrings->size() - a; j++){
+        vectorDestrings->at(j) = vectorDestrings->at(b);
+        b++;
+        }
+    }
+}  
+
+void PersistenciaDeModulo::procuraModuloInterno(string moduloAtual, int a, int b){
+    for (int j = 0; vectorDestrings->at(j) == "f"; j++){ // Encontra o modulo mais interno
+        if (vectorDestrings->at(j) == "S"){
+            moduloAtual = "S";
+            a = j;
+        }
+        if (vectorDestrings->at(j) == "P"){
+            moduloAtual = "P";
+            a = j;
+        }
+        if (vectorDestrings->at(j) == "R"){
+            moduloAtual = "R";
+            a = j;
+        }
+        if (vectorDestrings->at(j) == "f"){
+            b = j;
+        }
+    }
+
+}
+
+Modulo* PersistenciaDeModulo::lerDeArquivo(){
     ifstream arquivoLido;
     arquivoLido.open(nomeDoArquivo);
 
     if (arquivoLido.fail()){ // Verifica se o arquivo foi encontrado e se pode ser aberto
-        cout << "Arquivo não encontrado" << endl;
-        arquivoLido.close();
+        throw new invalid_argument("Erro ao abrir o arquivo");
+        arquivoLido.close(); 
         return 0;
     }
+    string tipo;
+    
+    vectorDestrings = new vector<string>();
+    int i = 0;
+    while (arquivoLido){ // enquanto nao é nem failbit nem badbit
+        arquivoLido >> (*vectorDestrings)[i];
+        i++;
+    }
+    if (!arquivoLido.eof()){
+        throw new logic_error("Erro na leitura");
+    }
 
-    list<Modulo*>::iterator i = listaDeModulos->begin();
-    while (arquivoLido){ // enquanto ele n é nem failbit nem badbit
-
-        
+    string moduloAtual;
+    int inicioDoModulo = 0;
+    int finalDoModulo = 0;
+    k = 0;
+    while (finalDoModulo != vectorDestrings->size()){
+        procuraModuloInterno(moduloAtual, inicioDoModulo, finalDoModulo);
+        if (moduloAtual == "S"){
+            ModuloEmSerie* moduloEmSerie = new ModuloEmSerie();
+            adicionaCircuitos(moduloEmSerie, inicioDoModulo, finalDoModulo);
+        }
+        if (moduloAtual == "P"){
+            ModuloEmParalelo* moduloEmParalelo = new ModuloEmParalelo();
+            adicionaCircuitos(moduloEmParalelo, inicioDoModulo, finalDoModulo);
+        }
+        if (moduloAtual == "R"){
+            ModuloRealimentado* moduloRealimentado = new ModuloRealimentado();
+            adicionaCircuitos(moduloRealimentado, inicioDoModulo, finalDoModulo);
+        }
+    }
+    k--;
+    return vectorDeModulos->at(k);
+    /*arquivoLido >> tipo;
+    numeroDeModulos = 0;
+    quantidadeTotal = 0;
+    if (tipo == "S"){
+        ModuloEmSerie* moduloEmSerie = new ModuloEmSerie();
+        vectorDeModulos->push_back(moduloEmSerie);
+        numeroDeModulos++;
+        quantidadeTotal++;
+        }
+    if (tipo == "P"){
+        ModuloEmParalelo* moduloEmParalelo = new ModuloEmParalelo();
+        vectorDeModulos->push_back(moduloEmParalelo);
+        numeroDeModulos++;
+        quantidadeTotal++;
+    }
+    if (tipo == "R"){
+        ModuloRealimentado* moduloRealimentado = new ModuloRealimentado();
+        vectorDeModulos->push_back(moduloRealimentado);
+        numeroDeModulos++;
+        quantidadeTotal++;
     }
     
-
-return 0;    
+    while (arquivoLido){ // enquanto ele n é nem failbit nem badbit
+        arquivoLido >> tipo; // usar o get line para o caso do amplficador
+        verificaTipo(tipo);
+        tipo = "";
+        quantidadeTotal++;
+    }*/
 }
+
