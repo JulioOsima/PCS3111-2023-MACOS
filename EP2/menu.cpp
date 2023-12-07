@@ -223,18 +223,14 @@ void menu(){
 
     switch (escolha1){
     case 1:{ // Simulacao 1 - Circuito advindo de aquivo
-
-        // utiliza o (sinal de entrada) no arquivo lido
-        // imprimir o sinal de saida titulo: Resultado Final
-        //salvarArquivo();
         string nomeDoArquivo;
         cout << "Qual o nome do arquivo a ser lido?" << endl
              << "Nome: " << endl;
         cin >> nomeDoArquivo;
-
         PersistenciaDeModulo* arquivoParaLer = new PersistenciaDeModulo(nomeDoArquivo);
-        arquivoParaLer->lerDeArquivo();
-
+        arquivoParaLer->lerDeArquivo()->processar(sinalDeEntrada)->imprimir("Resultado Final");
+        save(arquivoParaLer->lerDeArquivo());
+        delete arquivoParaLer; //verificar
 
         break;
     }
