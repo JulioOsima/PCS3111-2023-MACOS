@@ -18,7 +18,7 @@ class PersistenciaDeModulo{
 private:
     string nomeDoArquivo;
     vector<Modulo*>* vectorDeModulos;
-    vector<string>* vectorDestrings;
+    vector<string>* vectorDeStrings;
     void adicionaCircuitos(Modulo* modulo, int a, int b);
     int k;
     void procuraModuloInterno(string moduloAtual, int a, int b);

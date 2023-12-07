@@ -8,12 +8,7 @@ PersistenciaDeModulo::PersistenciaDeModulo(string nomeDoArquivo){
 }
 
 PersistenciaDeModulo::~PersistenciaDeModulo(){
-    /*while (listaDeModulos->empty() == false){
-        Modulo* p = listaDeModulos->front();
-        listaDeModulos->pop_front();
-        delete p;
-    }
-    delete listaDeModulos;*/
+    // deletar tudo
 
 } 
 
@@ -80,54 +75,53 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){\
     arquivoSalvo.close();
 }
 
-void PersistenciaDeModulo::adicionaCircuitos(Modulo* modulo, int a, int b){
+void PersistenciaDeModulo::adicionaCircuitos(Modulo* modulo, int a, int b){     // Uma vez definido o modulo mais interno, basta adicionar os circuitos ao modulo
     a++;
-    b--;
     for (int i = a; i < b; i++){
-        if (vectorDestrings->at(i) == "A");{
+        if (vectorDeStrings->at(i) == "A");{
             Amplificador* amplificador = new Amplificador(2);
             modulo->adicionar(amplificador);
         }
-        if (vectorDestrings->at(i) == "D");{
+        if (vectorDeStrings->at(i) == "D");{
             Derivador* derivador = new Derivador();
             modulo->adicionar(derivador);
         }
-        if (vectorDestrings->at(i) == "I");{
+        if (vectorDeStrings->at(i) == "I");{
             Integrador* integrador = new Integrador();
             modulo->adicionar(integrador);
         }
-        if (vectorDestrings->at(i) == "M"){
+        if (vectorDeStrings->at(i) == "M"){                                     // Se a string "M" for encontrada no vectorDeStrings modulo atual recebe o modulo correspondente a "M"
             modulo->adicionar(vectorDeModulos->at(k));
         }
     }
-    vectorDeModulos->at(k) = modulo;
+    vectorDeModulos->at(k) = modulo;                                            // Vector de modulos contendo os modulos ja criados
     k++;
+    vectorDeStrings->at(a) = "M";
+    a--;
     b++;
-    vectorDestrings->at(a) = "M";
-    a++;
-    if (b - 1 != vectorDestrings->size()){
-        for (int j = a; j < vectorDestrings->size() - a; j++){
-        vectorDestrings->at(j) = vectorDestrings->at(b);
+    if (b != vectorDeStrings->size()){                                          
+        for (int j = a; j < vectorDeStrings->size() - a - 2; j++){              // loop para reescrever o vectorDeStrings para poder repetir o metodo
+        vectorDeStrings->at(j) = vectorDeStrings->at(b);
         b++;
         }
     }
 }  
 
-void PersistenciaDeModulo::procuraModuloInterno(string moduloAtual, int a, int b){
-    for (int j = 0; vectorDestrings->at(j) == "f"; j++){ // Encontra o modulo mais interno
-        if (vectorDestrings->at(j) == "S"){
+void PersistenciaDeModulo::procuraModuloInterno(string moduloAtual, int a, int b){ // Encontra o modulo mais interno, e salva as posicoes relativas do inicio e fim
+    for (int j = 0; vectorDeStrings->at(j) == "f"; j++){ 
+        if (vectorDeStrings->at(j) == "S"){
             moduloAtual = "S";
             a = j;
         }
-        if (vectorDestrings->at(j) == "P"){
+        if (vectorDeStrings->at(j) == "P"){
             moduloAtual = "P";
             a = j;
         }
-        if (vectorDestrings->at(j) == "R"){
+        if (vectorDeStrings->at(j) == "R"){
             moduloAtual = "R";
             a = j;
         }
-        if (vectorDestrings->at(j) == "f"){
+        if (vectorDeStrings->at(j) == "f"){
             b = j;
         }
     }
@@ -138,20 +132,20 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
     ifstream arquivoLido;
     arquivoLido.open(nomeDoArquivo);
 
-    if (arquivoLido.fail()){ // Verifica se o arquivo foi encontrado e se pode ser aberto
-        throw new invalid_argument("Erro ao abrir o arquivo");
+    if (arquivoLido.fail()){                                                       // Verifica se o arquivo foi encontrado e se pode ser aberto
+        throw new invalid_argument("Erro ao abrir o arquivo");  
         arquivoLido.close(); 
         return 0;
     }
     string tipo;
     
-    vectorDestrings = new vector<string>();
+    vectorDeStrings = new vector<string>();
     int i = 0;
-    while (arquivoLido){ // enquanto nao é nem failbit nem badbit
-        arquivoLido >> (*vectorDestrings)[i];
+    while (arquivoLido){                                        
+        arquivoLido >> (*vectorDeStrings)[i];                                      // vector com as strings lidas
         i++;
     }
-    if (!arquivoLido.eof()){
+    if (!arquivoLido.eof()){                                    
         throw new logic_error("Erro na leitura");
     }
 
@@ -159,7 +153,7 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
     int inicioDoModulo = 0;
     int finalDoModulo = 0;
     k = 0;
-    while (finalDoModulo != vectorDestrings->size()){
+    while (finalDoModulo != vectorDeStrings->size() - 1){
         procuraModuloInterno(moduloAtual, inicioDoModulo, finalDoModulo);
         if (moduloAtual == "S"){
             ModuloEmSerie* moduloEmSerie = new ModuloEmSerie();
@@ -175,7 +169,7 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
         }
     }
     k--;
-    return vectorDeModulos->at(k);
+    return vectorDeModulos->at(k);                                                  // O ultimo modulo do vectorDeModulos contem o modulo que contem todos os outros modulos e circuitos.
     /*arquivoLido >> tipo;
     numeroDeModulos = 0;
     quantidadeTotal = 0;
