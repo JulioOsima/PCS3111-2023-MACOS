@@ -17,8 +17,8 @@ using namespace std;
 class PersistenciaDeModulo{
 private:
     string nomeDoArquivo;
-    vector<Modulo*>* vectorDeModulos;
-    vector<string>* vectorDeStrings;
+    vector<Modulo*>* vectorDeModulos;       // deletado em: PersistenciaDeModulo.cpp l14
+    vector<string>* vectorDeStrings;        // deletado em: PersistenciaDeModulo.cpp l13
     void adicionaCircuitos(Modulo* modulo, int a, int b);
     int k;
     void procuraModuloInterno(string moduloAtual, int a, int b);

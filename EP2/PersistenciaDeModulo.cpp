@@ -8,8 +8,19 @@ PersistenciaDeModulo::PersistenciaDeModulo(string nomeDoArquivo){
 }
 
 PersistenciaDeModulo::~PersistenciaDeModulo(){
-    // deletar tudo
-
+    /*int i = 0;
+    delete vectorDeStrings;
+    while (!vectorDeModulos->empty()){
+        Modulo* m = vectorDeModulos->back();
+        vectorDeModulos->pop_back();
+        delete m;
+        i++;
+    }
+    delete vectorDeModulos;
+    */
+  
+    
+    
 } 
 
 string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
@@ -25,12 +36,13 @@ string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
         tipo = "D";
         return tipo;
     }
-    Amplificador *a1 = new Amplificador(g);
+    Amplificador *a1 = new Amplificador(g); // deletado em PersistenciaDeModulo.cpp l45
     a1 = dynamic_cast<Amplificador*>(circuito);
     if (a1 != NULL){
         string ganho;
         tipo = "A ";
         tipo = tipo + to_string(a1->getGanho());
+        delete a1;
         return tipo;
     }
     return NULL;
@@ -51,7 +63,7 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){\
     if (dynamic_cast<ModuloEmParalelo*>(mod)){
         arquivoSalvo << "P" << endl;
     }
-    ModuloRealimentado* modTipoRealimentado = new ModuloRealimentado();
+    ModuloRealimentado* modTipoRealimentado = new ModuloRealimentado(); // deletado em PersistenciaDeModulo.cpp l76
     modTipoRealimentado = dynamic_cast<ModuloRealimentado*>(mod);
     if (modTipoRealimentado != NULL){
         arquivoSalvo << "R" << endl;
@@ -64,6 +76,7 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){\
         arquivoSalvo << "f" << endl;
         delete modTipoRealimentado;
         arquivoSalvo.close();
+        return; // para dizer q a funcao acaba aqui
     }
     list<CircuitoSISO*>::iterator i = mod->getCircuitos()->begin();
 
@@ -73,20 +86,30 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){\
     }
     arquivoSalvo << "f";
     arquivoSalvo.close();
+    
+
+    // deletar os objetos criados
 }
 
-void PersistenciaDeModulo::adicionaCircuitos(Modulo* modulo, int a, int b){     // Uma vez definido o modulo mais interno, basta adicionar os circuitos ao modulo
+
+
+
+
+
+
+
+void PersistenciaDeModulo::adicionaCircuitos(Modulo* modulo, int a, int b){         // Uma vez definido o modulo mais interno, basta adicionar os circuitos ao modulo
     a++;
     for (int i = a; i < b; i++){
-        if (vectorDeStrings->at(i) == "A");{
+        if (vectorDeStrings->at(i) == "A"){
             Amplificador* amplificador = new Amplificador(2);
             modulo->adicionar(amplificador);
         }
-        if (vectorDeStrings->at(i) == "D");{
+        if (vectorDeStrings->at(i) == "D"){
             Derivador* derivador = new Derivador();
             modulo->adicionar(derivador);
         }
-        if (vectorDeStrings->at(i) == "I");{
+        if (vectorDeStrings->at(i) == "I"){
             Integrador* integrador = new Integrador();
             modulo->adicionar(integrador);
         }
@@ -107,7 +130,7 @@ void PersistenciaDeModulo::adicionaCircuitos(Modulo* modulo, int a, int b){     
     }
 }  
 
-void PersistenciaDeModulo::procuraModuloInterno(string moduloAtual, int a, int b){ // Encontra o modulo mais interno, e salva as posicoes relativas do inicio e fim
+void PersistenciaDeModulo::procuraModuloInterno(string moduloAtual, int a, int b){  // Encontra o modulo mais interno, e salva as posicoes relativas do inicio e fim
     for (int j = 0; vectorDeStrings->at(j) == "f"; j++){ 
         if (vectorDeStrings->at(j) == "S"){
             moduloAtual = "S";
@@ -132,17 +155,17 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
     ifstream arquivoLido;
     arquivoLido.open(nomeDoArquivo);
 
-    if (arquivoLido.fail()){                                                       // Verifica se o arquivo foi encontrado e se pode ser aberto
-        throw new invalid_argument("Erro ao abrir o arquivo");  
+    if (arquivoLido.fail()){                                                        // Verifica se o arquivo foi encontrado e se pode ser aberto
+        throw new invalid_argument("Erro ao abrir o arquivo");      
         arquivoLido.close(); 
         return 0;
     }
     string tipo;
     
-    vectorDeStrings = new vector<string>();
+    vectorDeStrings = new vector<string>();     // Deletado no destrutor
     int i = 0;
     while (arquivoLido){                                        
-        arquivoLido >> (*vectorDeStrings)[i];                                      // vector com as strings lidas
+        arquivoLido >> (*vectorDeStrings)[i];                                       // vector com as strings lidas
         i++;
     }
     if (!arquivoLido.eof()){                                    
@@ -169,6 +192,8 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
         }
     }
     k--;
+
+
     return vectorDeModulos->at(k);                                                  // O ultimo modulo do vectorDeModulos contem o modulo que contem todos os outros modulos e circuitos.
     /*arquivoLido >> tipo;
     numeroDeModulos = 0;

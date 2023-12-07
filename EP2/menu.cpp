@@ -17,8 +17,8 @@ using namespace std;
 
 //
 //  Verificar os deletes 
-//  Adicionar o metodo do modulo realimentado - Aparentemente resolvido
-//  Adicionar a funcao de ler modulo de arquivo
+//  Adicionar o metodo do modulo realimentado                                                       - Aparentemente resolvido
+//  Adicionar a funcao de ler modulo de arquivo                                                     - Aparentemente resolvido
 //  Verificar os possiveis erros de input
 //  Formatar o codigo: identaçao e retirar os comentarios inuteis e adicionar os comentarios uteis
 //  adicionar os try and catch toda vez que for criar um sinal
@@ -136,9 +136,11 @@ void save(Modulo *modulo){
         catch(logic_error *e){
         }
         delete save;
+        delete modulo;
         break;
     }    
     case 2:
+        delete modulo;
         break;
     default:
         break;
@@ -225,13 +227,21 @@ void menu(){
     case 1:{ // Simulacao 1 - Circuito advindo de aquivo
         string nomeDoArquivo;
         cout << "Qual o nome do arquivo a ser lido?" << endl
-             << "Nome: " << endl;
+             << "Nome: ";
         cin >> nomeDoArquivo;
+        cout << endl;
         PersistenciaDeModulo* arquivoParaLer = new PersistenciaDeModulo(nomeDoArquivo);
-        arquivoParaLer->lerDeArquivo()->processar(sinalDeEntrada)->imprimir("Resultado Final");
-        save(arquivoParaLer->lerDeArquivo());
-        delete arquivoParaLer; //verificar
-
+        try{
+            try{
+                arquivoParaLer->lerDeArquivo()->processar(sinalDeEntrada)->imprimir("Resultado Final");
+                save(arquivoParaLer->lerDeArquivo());
+            }
+            catch(logic_error *e){
+            }   
+        }
+        catch(invalid_argument *e){
+        }
+        delete arquivoParaLer; //verificar 
         break;
     }
     case 2:{ // Simulcao 2 - Sequencia propria de operacoes
