@@ -7,3 +7,5 @@ CircuitoMISO::CircuitoMISO() : Circuito(){
 CircuitoMISO::~CircuitoMISO(){
 
 }
+
+

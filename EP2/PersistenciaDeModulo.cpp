@@ -49,7 +49,7 @@ string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
     return NULL;
 }
 
-void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
+void PersistenciaDeModulo::salvarEmArquivo(Modulo* mod){
     ofstream arquivoSalvo;
     arquivoSalvo.open(nomeDoArquivo);
 
@@ -68,9 +68,9 @@ void PersistenciaDeModulo::salvarEmAquivo(Modulo* mod){
     modTipoRealimentado = dynamic_cast<ModuloRealimentado*>(mod);
     if (modTipoRealimentado != NULL){
         arquivoSalvo << "R" << endl;
-        list<ModuloEmSerie*>::iterator k = modTipoRealimentado->getCircuitos()->begin(); // lista de modulos em serie 
-        list<CircuitoSISO*>::iterator l = (*k)->getCircuitos()->begin();
-        while (l != (*k)->getCircuitos()->end()){
+        
+        list<CircuitoSISO*>::iterator l = modTipoRealimentado->getCircuitos()->begin();
+        while (l != modTipoRealimentado->getCircuitos()->end()){
         arquivoSalvo << verificaModulo((*l)) << endl;
         l++;
         }

@@ -8,13 +8,14 @@
 
 class ModuloRealimentado:public Modulo{
 private:
-    list<ModuloEmSerie*>* listaDeMS;
+    
+     ModuloEmSerie* moduloInterno;
 
 public:
     ModuloRealimentado();
     virtual ~ModuloRealimentado();
-    void adicionar(ModuloEmSerie* moduloS);
-    list<ModuloEmSerie*>* getCircuitos();
+    void adicionar(CircuitoSISO* circ);
+    list<CircuitoSISO*>* getCircuitos();
     Sinal* processar(Sinal* sinalIN);
 };
 

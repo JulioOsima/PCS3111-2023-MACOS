@@ -131,7 +131,7 @@ void save(Modulo *modulo){
         cout << endl;
         PersistenciaDeModulo* save = new PersistenciaDeModulo(nomeDoArquivo);
         try {
-            save->salvarEmAquivo(modulo);
+            save->salvarEmArquivo(modulo);
             delete save;
             delete modulo;
         } catch (logic_error *e) {

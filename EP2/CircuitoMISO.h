@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class CircuitoMISO:Circuito{
+class CircuitoMISO:public Circuito{
 private:
     /* data */
 

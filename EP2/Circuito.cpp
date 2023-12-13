@@ -18,7 +18,7 @@ void Circuito::imprimir(){
 }
 
 int Circuito::getUltimoID(){ // pq o static da erro?
-    if (proximoID - 1 <= 0){
+    if (proximoID == 0){
         return 0;
     }
     

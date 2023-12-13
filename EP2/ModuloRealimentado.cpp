@@ -1,24 +1,26 @@
 #include "ModuloRealimentado.h"
 
 ModuloRealimentado::ModuloRealimentado():Modulo(){
-    listaDeMS = new list<ModuloEmSerie*>();
+    //listaDeMS = new list<ModuloEmSerie*>();
+     moduloInterno = new ModuloEmSerie();
 }
 
 ModuloRealimentado::~ModuloRealimentado(){
-    while (listaDeMS->empty() == false){
-        ModuloEmSerie* p = listaDeMS->front();
-        listaDeMS->pop_front();
+    while (moduloInterno->getCircuitos()->empty() == false){
+        CircuitoSISO* p = moduloInterno->getCircuitos()->front();
+        moduloInterno->getCircuitos()->pop_front();
         delete p;
     }
-    delete listaDeMS;
+    delete moduloInterno;
 }
 
-void ModuloRealimentado::adicionar(ModuloEmSerie* moduloEmSerie){
-    listaDeMS->push_back(moduloEmSerie);
+void ModuloRealimentado::adicionar(CircuitoSISO* circ){
+    moduloInterno->adicionar(circ);
 }
 
-list<ModuloEmSerie*>* ModuloRealimentado::getCircuitos(){
-    return listaDeMS;
+list<CircuitoSISO*>* ModuloRealimentado::getCircuitos(){
+
+    return moduloInterno->getCircuitos();
 }
 
 Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
@@ -34,9 +36,9 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
     Sinal* sinalIntermediario = new Sinal(sinalIN->getSequencia()[0],1);
     diferenca = sinalIntermediario;
 
-    list<ModuloEmSerie*>::iterator k = listaDeMS->begin();
-    saida = (*k)->processar(diferenca);
-    k++;
+    //list<ModuloEmSerie*>::iterator k = listaDeMS->begin();
+    saida = moduloInterno->processar(diferenca);
+    
     delete diferenca;
 
     Amplificador* inversor = new Amplificador(-1);
@@ -46,7 +48,7 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
         saidaInvertida = new Sinal(sequenciaSaidaInvertida, i + 1);
         diferenca = somaEntradaESaidaInvertida->processar(sinalIN, saidaInvertida);
         delete saida;
-        saida = new Sinal((*k)->processar(diferenca)->getSequencia(), (*k)->processar(diferenca)->getComprimento());
+        saida = new Sinal(moduloInterno->processar(diferenca)->getSequencia(), moduloInterno->processar(diferenca)->getComprimento());
         delete saidaInvertida;
         delete diferenca;
     }

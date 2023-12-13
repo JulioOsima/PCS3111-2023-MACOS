@@ -26,7 +26,7 @@ private:
 public:
     PersistenciaDeModulo(string nomeDoArquivo);
     virtual ~PersistenciaDeModulo();
-    void salvarEmAquivo(Modulo* mod);
+    void salvarEmArquivo(Modulo* mod);
     Modulo* lerDeArquivo();
 };
 

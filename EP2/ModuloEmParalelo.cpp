@@ -24,13 +24,11 @@ Sinal* ModuloEmParalelo::processar(Sinal* sinalIN){
     while (i != this->getCircuitos()->end()){
         if ((*i) != nullptr){
             listaVazia = false;
-            break;
         }   
         i++;
     }
     if (listaVazia == true){
     throw new logic_error("Não possui ciruitos SISO");
-    return 0;
     }
    
     sequenciaDeSaida = new double[sinalIN->getComprimento()];
