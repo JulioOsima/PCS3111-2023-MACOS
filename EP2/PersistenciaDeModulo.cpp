@@ -37,7 +37,7 @@ string PersistenciaDeModulo::verificaModulo(CircuitoSISO* circuito){
         tipo = "D";
         return tipo;
     }
-    Amplificador *a1 = new Amplificador(g); // deletado em PersistenciaDeModulo.cpp l45
+    Amplificador *a1 = new Amplificador(g); // deletado em PersistenciaDeModulo.cpp l46
     a1 = dynamic_cast<Amplificador*>(circuito);
     if (a1 != NULL){
         string ganho;
@@ -93,13 +93,6 @@ void PersistenciaDeModulo::salvarEmArquivo(Modulo* mod){
     // deletar os objetos criados
 }
 
-
-
-
-
-
-
-
 void PersistenciaDeModulo::adicionaCircuitos(Modulo* modulo, int a, int b){         // Uma vez definido o modulo mais interno, basta adicionar os circuitos ao modulo
     a++;
     for (int i = a; i < b; i++){
@@ -133,7 +126,7 @@ void PersistenciaDeModulo::adicionaCircuitos(Modulo* modulo, int a, int b){     
 }  
 
 void PersistenciaDeModulo::procuraModuloInterno(string moduloAtual, int a, int b){  // Encontra o modulo mais interno, e salva as posicoes relativas do inicio e fim
-    for (int j = 0; vectorDeStrings->at(j) == "f"; j++){ 
+    for (int j = 0; vectorDeStrings->at(j) == "f"; j++){ // n esta considerando que os modulos nao estao necessariamente todos um dentro do outro
         if (vectorDeStrings->at(j) == "S"){
             moduloAtual = "S";
             a = j;
@@ -153,6 +146,45 @@ void PersistenciaDeModulo::procuraModuloInterno(string moduloAtual, int a, int b
 
 }
 
+void PersistenciaDeModulo::interior(Modulo* moduloPrincipal, int i){
+    double g;
+    while (i != (vectorDeStrings->size() - 1)){
+        if (vectorDeStrings->at(i) == "f"){
+            break;
+        }
+        if (vectorDeStrings->at(i) == "I"){
+            Integrador* I = new Integrador();
+            moduloPrincipal->getCircuitos()->push_back(I);
+        }
+        if (vectorDeStrings->at(i) == "D"){
+            Derivador* D = new Derivador();
+            moduloPrincipal->getCircuitos()->push_back(D);
+        }
+        if (vectorDeStrings->at(i) == "A"){
+            i++;
+            g = stod(vectorDeStrings->at(i)); 
+            Amplificador* A = new Amplificador(g);
+            moduloPrincipal->getCircuitos()->push_back(A);
+        }
+        if (vectorDeStrings->at(i) == "S"){
+            ModuloEmSerie* S = new ModuloEmSerie();
+            interior(S, i);
+        }
+        if (vectorDeStrings->at(i) == "P"){
+            ModuloEmParalelo* P = new ModuloEmParalelo();
+            interior(P, i);
+        }
+        if (vectorDeStrings->at(i) == "R"){
+            ModuloRealimentado* R = new ModuloRealimentado();
+            interior(R, i);
+        }
+        
+        i++;
+    }
+}
+
+
+
 Modulo* PersistenciaDeModulo::lerDeArquivo(){
     ifstream arquivoLido;
     vectorDeModulos = new vector<Modulo*>();
@@ -164,8 +196,90 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
         return 0;
     }
     string tipo;
+
+    vectorDeStrings = new vector<string>();
+    int it = 0;
+
+    while (arquivoLido){
+        arquivoLido >> vectorDeStrings->at(it);
+        it++;
+    }
     
-    vectorDeStrings = new vector<string>();     // Deletado no destrutor
+    int i = 0;
+    if (vectorDeStrings->at(i) == "S"){
+        ModuloEmSerie* S = new ModuloEmSerie();
+        i++;
+        interior(S, i);
+        return S;
+    }
+    if (vectorDeStrings->at(i) == "P"){
+        ModuloEmParalelo* P = new ModuloEmParalelo();
+        i++;
+        interior(P, i);
+        return P;
+    }
+    if (vectorDeStrings->at(i) == "R"){
+        ModuloRealimentado* R = new ModuloRealimentado();
+        i++;
+        interior(R, i);
+        return R;
+    }
+    
+    
+    /*vectorDeStrings = new vector<string>();
+    string matrizDeModulos[10][10];
+    int it;
+
+    while(arquivoLido){ // Criar a matriz aqui para ler depois
+        arquivoLido >> vectorDeStrings->at(it);
+        it++;
+    }
+    if (!arquivoLido.eof()){
+        throw new logic_error("Erro na leitura");
+    }
+    // Tipos de modulos
+    // R - Realimentado
+    // S - Serie
+    // P - Paralelo
+
+    int i, j;
+    i = 0;
+    j = 0;
+    it = 1;
+    matrizDeModulos[i][j] = vectorDeStrings->at(it);
+    i++;
+    j++;
+    while (it != vectorDeStrings->size() - 1){
+        if (vectorDeStrings->at(it) == "S" || vectorDeStrings->at(it) == "P" || vectorDeStrings->at(it) == "R"){
+            matrizDeModulos[i][j] = vectorDeStrings->at(it);
+            i++;
+            j++;
+            it++;
+            break;
+        }
+        if (vectorDeStrings->at(it) == "I" || vectorDeStrings->at(it) == "D"){
+            matrizDeModulos[i][j] = vectorDeStrings->at(it);
+            i++;
+            it++;
+            break;
+        }
+        
+        if (vectorDeStrings->at(i) == "f"){
+            i++;
+            j--;
+            break;
+        }
+    }
+    
+    */
+
+
+
+
+
+
+
+   /* vectorDeStrings = new vector<string>();     // Deletado no destrutor
     int i = 0;
     while (arquivoLido){                                        
         arquivoLido >> (*vectorDeStrings)[i];                                       // vector com as strings lidas
@@ -180,7 +294,7 @@ Modulo* PersistenciaDeModulo::lerDeArquivo(){
     int finalDoModulo = 0;
     k = 0;
     while (finalDoModulo != vectorDeStrings->size() - 1){
-        procuraModuloInterno(moduloAtual, inicioDoModulo, finalDoModulo);
+        procuraModuloInterno(moduloAtual, inicioDoModulo, finalDoModulo); // Altera o inicio do moduloy
         if (moduloAtual == "S"){
             ModuloEmSerie* moduloEmSerie = new ModuloEmSerie();
             adicionaCircuitos(moduloEmSerie, inicioDoModulo, finalDoModulo);

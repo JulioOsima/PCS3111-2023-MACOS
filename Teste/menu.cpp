@@ -41,7 +41,7 @@ Sinal *aquisicao(Sinal* sinal){ // Função para aquisição de sinais
         }
         Sinal *sinalAdquirido1 = new Sinal(sequencia, 60);                                  // Deletado em: L45
         sinal = sinalAdquirido1;
-        //delete[] sequencia;
+        delete[] sequencia;
         delete sinalAdquirido1;
         return sinal;
     }
